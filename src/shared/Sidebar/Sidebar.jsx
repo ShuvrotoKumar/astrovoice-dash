@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
   return (
     <div
-      className={`bg-[#393d4a] text-white border border-[#E5E7EB] h-screen overflow-y-auto py-5 md:py-0 z-50 transition-transform shadow-lg my-5 rounded-lg shadow-[0_0_10px_0_rgba(0,0,0,0.1)]
+      className={`bg-[#393d4a] text-white h-screen overflow-y-auto py-5 md:py-0 z-50 transition-transform shadow-lg my-5 rounded-lg shadow-[0_0_10px_0_rgba(0,0,0,0.1)]
         w-[80%] sm:w-[70%] md:w-[60%] lg:w-70 xl:w-72
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         fixed top-0 left-0
