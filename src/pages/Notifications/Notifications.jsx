@@ -79,7 +79,7 @@ export default function Notifications() {
             renderItem={(item) => (
               <div
                 onClick={() => !item.read && markRead(item.id, true)}
-                className={`group flex items-start justify-between gap-4 p-4 border border-gray-200 bg-white rounded-lg mb-3 transition hover:shadow-sm cursor-pointer ${
+                className={`group flex items-start justify-between gap-4 p-4 border border-[#4a5060] bg-[#393d4a] rounded-lg mb-3 transition hover:shadow-sm cursor-pointer ${
                   item.read ? "opacity-90" : ""
                 }`}
               >
@@ -96,12 +96,12 @@ export default function Notifications() {
                     <h4 className="text-base md:text-lg font-semibold text-[#ffbf00]">
                       {item.title}
                     </h4>
-                    <span className="text-xs md:text-sm bg-gray-100 text-gray-600 px-2 py-1 rounded-full shrink-0">
+                    <span className="text-xs md:text-sm bg-[#2a2a2a] text-gray-300 px-2 py-1 rounded-full shrink-0">
                       {item.time}
                     </span>
                   </div>
                   {item.description && (
-                    <p className="text-gray-600 text-sm mt-1 pr-2">
+                    <p className="text-gray-300 text-sm mt-1 pr-2">
                       {item.description}
                     </p>
                   )}
@@ -137,7 +137,7 @@ export default function Notifications() {
             )}
           />
           {items.length === 0 && (
-            <div className="text-center text-gray-500 py-10">
+            <div className="text-center text-gray-400 py-10">
               No notifications
             </div>
           )}
