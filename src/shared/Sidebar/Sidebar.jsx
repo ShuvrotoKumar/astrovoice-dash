@@ -52,7 +52,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <RxDashboard className="w-5 h-5" />
@@ -65,7 +65,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/user-details")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <LuUsers className="w-5 h-5" />
@@ -79,7 +79,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/earnings")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <BsCurrencyDollar className="w-5 h-5" />
@@ -93,7 +93,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/subscriptions")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <BsCreditCard className="w-5 h-5" />
@@ -108,7 +108,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/categories")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <BiCategory className="w-5 h-5" />
@@ -123,7 +123,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/payment-management")
                 ? "bg-#ffbf00 text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <RiFlaskLine className="w-5 h-5" />
@@ -137,7 +137,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/invoices")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <BsReceipt className="w-5 h-5" />
@@ -150,7 +150,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/chat")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <BiCategory className="w-5 h-5" />
@@ -165,7 +165,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/create-admin")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <MdAdminPanelSettings className="w-5 h-5" />
@@ -180,7 +180,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/reports")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <MdAdminPanelSettings className="w-5 h-5" />
@@ -192,7 +192,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/blogs")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <TbReport className="w-5 h-5" />
@@ -204,7 +204,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/settings")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
-                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
             <IoMdSettings className="w-5 h-5 text-lg font-semibold" />
