@@ -359,11 +359,15 @@ const Reports = () => {
         theme={{
           components: {
             Table: {
-              headerBg: "#393d4a",
-              headerColor: "#000000",
+              headerBg: "#ffbf00",
+              headerColor: "#ffffff",
               cellFontSize: 14,
-              headerSplitColor: "#E5E7EB",
+              headerSplitColor: "#393d4a",
               colorTextHeading: "#000000",
+              colorBgContainer: "#393d4a",
+              colorText: "#ffffff",
+              rowHoverBg: "#4a5060",
+              borderColor: "#4a5060",
             },
             Pagination: {
               colorPrimaryBorder: "#ffbf00",
@@ -380,6 +384,7 @@ const Reports = () => {
           columns={columns}
           pagination={{ pageSize: 10 }}
           scroll={{ x: "max-content" }}
+          className="bg-[#393d4a]"
         />
 
         {/* View Report Modal */}

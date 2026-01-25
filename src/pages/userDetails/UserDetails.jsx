@@ -247,11 +247,15 @@ function UserDetails() {
               colorPrimary: "#111827",
             },
             Table: {
-              headerBg: "[#ffbf00]",
-              headerColor: "#000000", // Changed to black
+              headerBg: "#393d4a",
+              headerColor: "#ffffff",
               cellFontSize: 16,
-              headerSplitColor: "[#ffbf00]",
-              colorTextHeading: "#000000", // Ensure header text is black
+              headerSplitColor: "#393d4a",
+              colorTextHeading: "#ffffff",
+              colorBgContainer: "#393d4a",
+              colorText: "#ffffff",
+              rowHoverBg: "#4a5060",
+              borderColor: "#4a5060",
             },
           },
         }}
@@ -261,6 +265,7 @@ function UserDetails() {
           columns={columns}
           pagination={{ pageSize: 10 }}
           scroll={{ x: "max-content" }}
+          className="bg-[#393d4a]"
         />
         
         {/* View Modal */}

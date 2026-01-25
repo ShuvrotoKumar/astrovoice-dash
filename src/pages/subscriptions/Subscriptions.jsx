@@ -234,11 +234,15 @@ function Subscriptions() {
               colorPrimary: "#111827",
             },
             Table: {
-              headerBg: "#f9fafb",
-              headerColor: "#000000",
+              headerBg: "#ffbf00",
+              headerColor: "#ffffff",
               cellFontSize: 14,
-              headerSplitColor: "#f9fafb",
-              colorTextHeading: "#000000",
+              headerSplitColor: "#393d4a",
+              colorTextHeading: "#ffffff",
+              colorBgContainer: "#393d4a",
+              colorText: "#ffffff",
+              rowHoverBg: "#4a5060",
+              borderColor: "#4a5060",
             },
           },
         }}
@@ -248,7 +252,8 @@ function Subscriptions() {
           columns={columns}
           pagination={{ pageSize: 10 }}
           scroll={{ x: "max-content" }}
-          rowClassName="hover:bg-gray-50 cursor-pointer"
+          className="bg-[#393d4a]"
+          rowClassName="hover:bg-[#4a5060] cursor-pointer"
         />
         
         

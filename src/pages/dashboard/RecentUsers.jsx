@@ -91,7 +91,7 @@ const RecentUsers = () => {
               headerBg: "#ffbf00",
               headerColor: "#ffffff",
               cellFontSize: 16,
-              headerSplitColor: "#393d4a",
+              headerSplitColor: "#ffbf00",
               colorBgContainer: "#393d4a",
               colorText: "#ffffff",
               rowHoverBg: "#4a5060",

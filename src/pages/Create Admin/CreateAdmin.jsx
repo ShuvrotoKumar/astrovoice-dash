@@ -122,10 +122,15 @@ export default function CreateAdmin() {
         theme={{
           components: {
             Table: {
-              headerBg: "[#ffbf00]",
-              headerColor: "[#ffbf00]",
+              headerBg: "#ffbf00",
+              headerColor: "#ffffff",
               cellFontSize: 16,
-              headerSplitColor: "[#ffbf00]",
+              headerSplitColor: "#393d4a",
+              colorTextHeading: "#ffffff",
+              colorBgContainer: "#393d4a",
+              colorText: "#ffffff",
+              rowHoverBg: "#4a5060",
+              borderColor: "#4a5060",
             },
             Pagination: {
               colorPrimaryBorder: "[#ffbf00]",
@@ -143,6 +148,7 @@ export default function CreateAdmin() {
           columns={columns}
           pagination={{ pageSize: 10 }}
           scroll={{ x: "max-content" }}
+          className="bg-[#393d4a]"
         />
       </ConfigProvider>
     </div>
