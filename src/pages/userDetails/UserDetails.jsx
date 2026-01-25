@@ -150,7 +150,7 @@ function UserDetails() {
             <MdBlock className="h-5 w-5 text-red-600 cursor-pointer rounded-md" />
           </button>
           <button className="" onClick={() => showViewModal(record)}>
-            <FiEdit2 className="text-[#C9A961] w-5 h-5 cursor-pointer rounded-md" />
+            <FiEdit2 className="text-[#ffbf00] w-5 h-5 cursor-pointer rounded-md" />
           </button>
         </div>
         
@@ -177,7 +177,7 @@ function UserDetails() {
       html: `Are you sure you want to block <strong>${row.fullName}</strong>?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#C9A961',
+      confirmButtonColor: '#ffbf00',
       cancelButtonColor: '#6B7280',
       confirmButtonText: 'Block',
       cancelButtonText: 'Cancel',
@@ -188,7 +188,7 @@ function UserDetails() {
           title: 'Blocked!',
           text: `${row.fullName} has been blocked.`,
           icon: 'success',
-          confirmButtonColor: '#C9A961',
+          confirmButtonColor: '#ffbf00',
           timer: 2000,
           timerProgressBar: true
         });
@@ -198,7 +198,7 @@ function UserDetails() {
 
   return (
     <div>
-      <div className="bg-[#C9A961] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap md:flex-nowrap items-start md:items-center gap-2 md:gap-3">
+      <div className="bg-[#ffbf00] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap md:flex-nowrap items-start md:items-center gap-2 md:gap-3">
         <button
           onClick={() => navigate(-1)}
           className="text-white hover:opacity-90 transition"
@@ -247,10 +247,10 @@ function UserDetails() {
               colorPrimary: "#111827",
             },
             Table: {
-              headerBg: "[#C9A961]",
+              headerBg: "[#ffbf00]",
               headerColor: "#000000", // Changed to black
               cellFontSize: 16,
-              headerSplitColor: "[#C9A961]",
+              headerSplitColor: "[#ffbf00]",
               colorTextHeading: "#000000", // Ensure header text is black
             },
           },
@@ -275,7 +275,7 @@ function UserDetails() {
           {selectedUser && (
             <div className="relative">
               {/* Header with green gradient */}
-              <div className="bg-[#C9A961] p-6 -m-6 mb-6 rounded-t-lg">
+              <div className="bg-[#ffbf00] p-6 -m-6 mb-6 rounded-t-lg">
                 <div className="flex items-center gap-6">
                   <div className="relative">
                     <img
@@ -326,7 +326,7 @@ function UserDetails() {
               <div className="flex justify-end items-center mt-8 pt-6 border-t border-gray-200">
                 <button
                   onClick={handleViewCancel}
-                  className="bg-[#C9A961] text-white font-semibold px-8 py-2 rounded-lg hover:bg-gray-600 transition-colors"
+                  className="bg-[#ffbf00] text-white font-semibold px-8 py-2 rounded-lg hover:bg-gray-600 transition-colors"
                 >
                   Close
                 </button>

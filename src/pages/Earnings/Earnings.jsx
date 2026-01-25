@@ -108,7 +108,7 @@ const Earnings = () => {
               <p className="text-sm text-green-600 mt-1">+12% from last week</p>
             </div>
             <div className="p-3 bg-blue-50 rounded-lg">
-              <svg className="w-6 h-6 text-[#C9A961]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-[#ffbf00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
@@ -207,7 +207,7 @@ const Earnings = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {transactions.map((tx) => (
                 <tr key={tx.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#C9A961]">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#ffbf00]">
                     {tx.bookingId}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -240,7 +240,7 @@ const Earnings = () => {
             <button className="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
               Previous
             </button>
-            <button className="px-3 py-1 border border-blue-500 rounded-md text-sm font-medium text-[#C9A961] bg-blue-50">
+            <button className="px-3 py-1 border border-blue-500 rounded-md text-sm font-medium text-[#ffbf00] bg-blue-50">
               1
             </button>
             <button className="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">

@@ -98,7 +98,7 @@ const Categories = () => {
             </div>
             <button 
               onClick={handleAddNew}
-              className="bg-[#C9A961] text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center"
+              className="bg-[#ffbf00] text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center"
             >
               <FiPlus className="mr-2" />
               <span>Add Category</span>
@@ -136,7 +136,7 @@ const Categories = () => {
                       <div className="flex justify-end items-center space-x-3">
                         <button 
                           onClick={() => handleEdit(category)}
-                          className="text-[#C9A961] hover:text-blue-900 p-1 hover:bg-blue-50 rounded"
+                          className="text-[#ffbf00] hover:text-blue-900 p-1 hover:bg-blue-50 rounded"
                           title="Edit category"
                         >
                           <FiEdit2 className="h-5 w-5" />
@@ -179,7 +179,7 @@ const Categories = () => {
                     <span className="sr-only">Previous</span>
                     <FiChevronLeft className="h-5 w-5" />
                   </button>
-                  <button className="relative inline-flex items-center px-4 py-2 border border-blue-500 bg-blue-50 text-sm font-medium text-[#C9A961] z-10">
+                  <button className="relative inline-flex items-center px-4 py-2 border border-blue-500 bg-blue-50 text-sm font-medium text-[#ffbf00] z-10">
                     1
                   </button>
                   <button className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
@@ -218,7 +218,7 @@ const Categories = () => {
             key="save" 
             type="primary" 
             onClick={handleSaveEdit}
-            className="bg-[#C9A961] hover:bg-blue-700"
+            className="bg-[#ffbf00] hover:bg-blue-700"
           >
             Save Changes
           </Button>
@@ -301,7 +301,7 @@ const Categories = () => {
             key="save" 
             type="primary" 
             onClick={handleSaveNew}
-            className="bg-[#C9A961] hover:bg-blue-700"
+            className="bg-[#ffbf00] hover:bg-blue-700"
           >
             Add Category
           </Button>

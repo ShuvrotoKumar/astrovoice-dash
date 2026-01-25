@@ -46,7 +46,7 @@ export default function Notifications() {
     setItems((prev) => prev.map((i) => ({ ...i, read: true })));
   return (
     <div className="p-5 min-h-screen">
-      <div className="bg-[#C9A961] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap md:flex-nowrap items-start md:items-center gap-2 md:gap-3">
+      <div className="bg-[#ffbf00] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap md:flex-nowrap items-start md:items-center gap-2 md:gap-3">
         <button
           onClick={() => navigate(-1)}
           className="text-white hover:opacity-90 transition"
@@ -67,7 +67,7 @@ export default function Notifications() {
         theme={{
           components: {
             List: {
-              colorPrimary: "[#C9A961]",
+              colorPrimary: "[#ffbf00]",
             },
           },
         }}
@@ -86,14 +86,14 @@ export default function Notifications() {
                 {/* Unread Accent Bar */}
                 <div
                   className={`w-1 rounded-full self-stretch ${
-                    item.read ? "bg-transparent" : "bg-[#C9A961]"
+                    item.read ? "bg-transparent" : "bg-[#ffbf00]"
                   }`}
                 />
 
                 {/* Content */}
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-base md:text-lg font-semibold text-[#C9A961]">
+                    <h4 className="text-base md:text-lg font-semibold text-[#ffbf00]">
                       {item.title}
                     </h4>
                     <span className="text-xs md:text-sm bg-gray-100 text-gray-600 px-2 py-1 rounded-full shrink-0">
@@ -106,7 +106,7 @@ export default function Notifications() {
                     </p>
                   )}
                   {!item.read && (
-                    <p className="text-[12px] text-[#C9A961] mt-1">New</p>
+                    <p className="text-[12px] text-[#ffbf00] mt-1">New</p>
                   )}
                 </div>
 
@@ -126,7 +126,7 @@ export default function Notifications() {
                     <Button
                       size="small"
                       type="primary"
-                      className="bg-[#C9A961] hover:bg-[#B09555] border-[#C9A961]"
+                      className="bg-[#ffbf00] hover:bg-[#B09555] border-[#ffbf00]"
                       onClick={() => markRead(item.id, true)}
                     >
                       Mark read

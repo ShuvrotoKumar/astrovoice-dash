@@ -33,11 +33,11 @@ function DashboardPage() {
           <div 
             key={stat.label}
             className={`bg-[#F2F2F2] p-4 rounded-lg flex flex-col items-center justify-center min-h-[120px] ${
-              index < array.length - 1 ? 'md:border-r-2 md:border-[#C9A961]' : ''
+              index < array.length - 1 ? 'md:border-r-2 md:border-[#ffbf00]' : ''
             }`}
           >
-            <p className="text-[#C9A961] text-2xl md:text-3xl font-bold">{stat.value}</p>
-            <p className="text-[#C9A961] text-lg md:text-xl font-semibold text-center">{stat.label}</p>
+            <p className="text-[#ffbf00] text-2xl md:text-3xl font-bold">{stat.value}</p>
+            <p className="text-[#ffbf00] text-lg md:text-xl font-semibold text-center">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -45,7 +45,7 @@ function DashboardPage() {
       {/* User Growth Section */}
       <div className="w-full bg-[#F2F2F2] rounded-lg shadow-md p-4 md:p-6">
         <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between md:items-center mb-6">
-          <h1 className="text-xl text-[#C9A961] font-semibold">User Growth</h1>
+          <h1 className="text-xl text-[#ffbf00] font-semibold">User Growth</h1>
           <div className="relative w-full md:w-40">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -67,7 +67,7 @@ function DashboardPage() {
                       key={year}
                       onClick={() => handleSelect(year)}
                       className={`px-4 py-2 cursor-pointer hover:bg-gray-50 transition-colors text-sm md:text-base ${
-                        year === selectedYear ? "bg-[#C9A961] text-white font-medium" : "text-gray-700"
+                        year === selectedYear ? "bg-[#ffbf00] text-white font-medium" : "text-gray-700"
                       }`}
                     >
                       {year}
@@ -84,7 +84,7 @@ function DashboardPage() {
       </div>
       {/* Recent Users Section */}
       <div className="w-full">
-        <h1 className="text-xl md:text-2xl text-[#C9A961] font-bold mb-4">Recent Joined Users</h1>
+        <h1 className="text-xl md:text-2xl text-[#ffbf00] font-bold mb-4">Recent Joined Users</h1>
         <div className="bg-white rounded-lg shadow overflow-hidden">
           <RecentUsers />
         </div>

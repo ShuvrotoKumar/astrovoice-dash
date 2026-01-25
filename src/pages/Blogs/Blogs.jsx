@@ -187,7 +187,7 @@ const Blogs = () => {
           </button>
           <button 
             onClick={() => handleEdit(record)}
-            className="text-[#C9A961] hover:text-blue-800 p-1"
+            className="text-[#ffbf00] hover:text-blue-800 p-1"
             title="Edit blog"
           >
             <FiEdit2 className="h-4 w-4" />
@@ -240,7 +240,7 @@ const Blogs = () => {
       html: `Are you sure you want to delete the blog <strong>${blog.title}</strong>?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#C9A961',
+      confirmButtonColor: '#ffbf00',
       cancelButtonColor: '#6B7280',
       confirmButtonText: 'Delete',
       cancelButtonText: 'Cancel',
@@ -253,7 +253,7 @@ const Blogs = () => {
           title: 'Deleted!',
           text: 'Blog has been deleted successfully.',
           icon: 'success',
-          confirmButtonColor: '#C9A961',
+          confirmButtonColor: '#ffbf00',
           timer: 2000,
           timerProgressBar: true
         });
@@ -287,7 +287,7 @@ const Blogs = () => {
       title: 'Updated!',
       text: 'Blog has been updated successfully.',
       icon: 'success',
-      confirmButtonColor: '#C9A961',
+      confirmButtonColor: '#ffbf00',
       timer: 2000,
       timerProgressBar: true
     });
@@ -310,7 +310,7 @@ const Blogs = () => {
       title: 'Added!',
       text: 'New blog has been added successfully.',
       icon: 'success',
-      confirmButtonColor: '#C9A961',
+      confirmButtonColor: '#ffbf00',
       timer: 2000,
       timerProgressBar: true
     });
@@ -318,7 +318,7 @@ const Blogs = () => {
 
   return (
     <div>
-      <div className="bg-[#C9A961] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap md:flex-nowrap items-start md:items-center gap-2 md:gap-3">
+      <div className="bg-[#ffbf00] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap md:flex-nowrap items-start md:items-center gap-2 md:gap-3">
         <button
           onClick={() => navigate(-1)}
           className="text-white hover:opacity-90 transition"
@@ -352,7 +352,7 @@ const Blogs = () => {
           </Select>
           <button
             onClick={handleAddNew}
-            className="bg-white text-[#C9A961] px-4 py-2 rounded-md hover:bg-gray-100 transition-colors flex items-center gap-2"
+            className="bg-white text-[#ffbf00] px-4 py-2 rounded-md hover:bg-gray-100 transition-colors flex items-center gap-2"
           >
             <IoAddOutline className="w-5 h-5" />
             <span>Add Blog</span>
@@ -383,11 +383,11 @@ const Blogs = () => {
               colorTextHeading: "#000000",
             },
             Pagination: {
-              colorPrimaryBorder: "#C9A961",
-              colorBorder: "#C9A961",
-              colorPrimaryHover: "#C9A961",
+              colorPrimaryBorder: "#ffbf00",
+              colorBorder: "#ffbf00",
+              colorPrimaryHover: "#ffbf00",
               colorTextPlaceholder: "#6B7280",
-              colorPrimary: "#C9A961",
+              colorPrimary: "#ffbf00",
             },
           },
         }}
@@ -409,7 +409,7 @@ const Blogs = () => {
         >
           {selectedBlog && (
             <div className="relative">
-              <div className="bg-[#C9A961] p-6 -m-6 mb-6 rounded-t-lg">
+              <div className="bg-[#ffbf00] p-6 -m-6 mb-6 rounded-t-lg">
                 <img
                   src={selectedBlog.featuredImage}
                   alt={selectedBlog.title}
@@ -431,15 +431,15 @@ const Blogs = () => {
 
               <div className="grid grid-cols-3 gap-4 mb-6">
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl font-bold text-[#C9A961]">{selectedBlog.views.toLocaleString()}</div>
+                  <div className="text-2xl font-bold text-[#ffbf00]">{selectedBlog.views.toLocaleString()}</div>
                   <div className="text-sm text-gray-600">Views</div>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl font-bold text-[#C9A961]">{selectedBlog.likes}</div>
+                  <div className="text-2xl font-bold text-[#ffbf00]">{selectedBlog.likes}</div>
                   <div className="text-sm text-gray-600">Likes</div>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl font-bold text-[#C9A961]">{selectedBlog.comments}</div>
+                  <div className="text-2xl font-bold text-[#ffbf00]">{selectedBlog.comments}</div>
                   <div className="text-sm text-gray-600">Comments</div>
                 </div>
               </div>
@@ -448,7 +448,7 @@ const Blogs = () => {
                 <button
                   onClick={() => setIsViewModalOpen(false)}
                   className="font-semibold px-8 py-2 rounded-lg transition-colors"
-                  style={{ backgroundColor: "#C9A961", color: "white" }}
+                  style={{ backgroundColor: "#ffbf00", color: "white" }}
                 >
                   Close
                 </button>
@@ -470,7 +470,7 @@ const Blogs = () => {
               key="save" 
               type="primary" 
               onClick={handleSaveEdit}
-              style={{ backgroundColor: "#C9A961", borderColor: "#C9A961" }}
+              style={{ backgroundColor: "#ffbf00", borderColor: "#ffbf00" }}
             >
               Save Changes
             </Button>
@@ -535,7 +535,7 @@ const Blogs = () => {
               key="save" 
               type="primary" 
               onClick={handleSaveNew}
-              style={{ backgroundColor: "#C9A961", borderColor: "#C9A961" }}
+              style={{ backgroundColor: "#ffbf00", borderColor: "#ffbf00" }}
             >
               Add Blog
             </Button>

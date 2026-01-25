@@ -8,7 +8,7 @@ import { IoCloseSharp, IoLogOutOutline } from "react-icons/io5";
 import {
   MdAdminPanelSettings,
 } from "react-icons/md";
-import { BsBookmarkCheck } from "react-icons/bs";
+import { BsBookmarkCheck, BsCreditCard } from "react-icons/bs";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
@@ -34,7 +34,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       {/* Close Button (Mobile Only) */}
       <button
         onClick={toggleSidebar}
-        className="absolute top-4 right-4 lg:hidden text-white bg-#C9A961 focus:outline-none p-2 rounded-full"
+        className="absolute top-4 right-4 lg:hidden text-white bg-#ffbf00 focus:outline-none p-2 rounded-full"
       >
         <IoCloseSharp />
       </button>
@@ -88,7 +88,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         </Link> */}
 
         {/* Subscriptions */}
-        {/* <Link to="/subscriptions" onClick={handleLinkClick}>
+        <Link to="/subscriptions" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/subscriptions")
@@ -97,9 +97,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             }`}
           >
             <BsCreditCard className="w-5 h-5" />
-            <p className="text-lg font-semibold">Schedule</p>
+            <p className="text-lg font-semibold">Subscriptions</p>
           </li>
-        </Link> */}
+        </Link>
 
         
         {/* Categories */}
@@ -122,7 +122,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/payment-management")
-                ? "bg-#C9A961 text-white px-3 py-3 rounded-lg"
+                ? "bg-#ffbf00 text-white px-3 py-3 rounded-lg"
                 : "hover:bg-gray-100 px-3 py-3 rounded-lg"
             }`}
           >
@@ -173,8 +173,21 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </li>
         </Link>
 
-      
-        <Link to="/blogs">
+          {/*Reports*/}
+
+      <Link to="/reports">
+          <li
+            className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/reports")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "hover:bg-gray-100 px-3 py-3 rounded-lg"
+            }`}
+          >
+            <MdAdminPanelSettings className="w-5 h-5" />
+            <p className="text-lg font-semibold">Reports</p>
+          </li>
+        </Link>
+        {/* <Link to="/blogs">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/blogs")
@@ -185,7 +198,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <TbReport className="w-5 h-5" />
             <p className="text-lg font-semibold">Blogs</p>
           </li>
-        </Link>
+        </Link> */}
         <Link to="/settings">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${

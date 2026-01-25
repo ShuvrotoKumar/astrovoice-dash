@@ -266,7 +266,7 @@ const Chat = () => {
         {/* Main Content */}
         <div className="flex-1 flex flex-col overflow-hidden bg-white rounded-lg shadow-sm m-4">
           {/* Chat Header */}
-          <div className="bg-gradient-to-r from-[#C9A961] to-blue-700 text-white p-3 shadow-sm">
+          <div className="bg-gradient-to-r from-[#ffbf00] to-blue-700 text-white p-3 shadow-sm">
             <div className="flex items-center gap-4">
               <button 
                 className="md:hidden p-1 hover:bg-white/20 rounded-full"
@@ -308,7 +308,7 @@ const Chat = () => {
                 <div
                   className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-sm ${
                     msg.sender === "me"
-                      ? "bg-[#C9A961] text-white rounded-br-md"
+                      ? "bg-[#ffbf00] text-white rounded-br-md"
                       : "bg-white text-gray-800 border rounded-bl-md"
                   }`}
                 >
@@ -379,7 +379,7 @@ const Chat = () => {
                 />
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="p-3 text-gray-500 hover:text-[#C9A961] hover:bg-blue-50 rounded-full transition-colors"
+                  className="p-3 text-gray-500 hover:text-[#ffbf00] hover:bg-blue-50 rounded-full transition-colors"
                 >
                   <IoImagesOutline className="w-5 h-5" />
                 </button>
@@ -388,7 +388,7 @@ const Chat = () => {
                   disabled={!newMessage.trim()}
                   className={`p-3 rounded-full transition-all ${
                     newMessage.trim()
-                      ? "bg-[#C9A961] hover:bg-blue-700 text-white shadow-lg"
+                      ? "bg-[#ffbf00] hover:bg-blue-700 text-white shadow-lg"
                       : "bg-gray-200 text-gray-400 cursor-not-allowed"
                   }`}
                 >

@@ -50,14 +50,14 @@ function VerificationCode() {
               <button
                 onClick={handleVerifyCode}
                 type="button"
-                className="w-1/3 bg-[#C9A961] text-white font-bold py-3 rounded-lg shadow-lg cursor-pointer mt-5"
+                className="w-1/3 bg-[#ffbf00] text-white font-bold py-3 rounded-lg shadow-lg cursor-pointer mt-5"
               >
                 Verify Code
               </button>
             </div>
-            <p className="text-[#C9A961] text-center mb-10">
+            <p className="text-[#ffbf00] text-center mb-10">
               You have not received the email?{" "}
-              <span className="text-[#C9A961]"> Resend</span>
+              <span className="text-[#ffbf00]"> Resend</span>
             </p>
           </div>
         </div>

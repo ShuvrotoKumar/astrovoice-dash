@@ -30,9 +30,9 @@ const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const { month, videoView } = payload[0].payload;
     return (
-      <div className="bg-white shadow-md p-3 rounded-md border text-gray-700 text-[#C9A961]">
-        <p className="font-medium text-[#C9A961]">Month: {month}</p>
-        <p className="font-medium text-[#C9A961]">Trainers: {videoView}</p>
+      <div className="bg-white shadow-md p-3 rounded-md border text-gray-700 text-[#ffbf00]">
+        <p className="font-medium text-[#ffbf00]">Month: {month}</p>
+        <p className="font-medium text-[#ffbf00]">Trainers: {videoView}</p>
       </div>
     );
   }
@@ -70,18 +70,18 @@ const TotalView = () => {
             bottom: 0,
           }}
         >
-          <XAxis tickLine={false} dataKey="month" className="text-[#C9A961]" />
+          <XAxis tickLine={false} dataKey="month" className="text-[#ffbf00]" />
           <YAxis
             tickLine={false}
             domain={[0, maxTrainerCount + 10]}
-            className="text-[#C9A961]"
+            className="text-[#ffbf00]"
           />
           <Tooltip content={<CustomTooltip />} />
           <Bar
             barSize={30}
             radius={[5, 5, 0, 0]}
             dataKey="videoView"
-            fill="#C9A961"
+            fill="#ffbf00"
           />
         </BarChart>
       </ResponsiveContainer>

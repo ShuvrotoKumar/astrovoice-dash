@@ -16,7 +16,7 @@ function ResetPassword() {
             </div>
             <form className="space-y-6">
               <div className="w-full">
-                <label className="text-xl text-[#C9A961] mb-2 font-bold">
+                <label className="text-xl text-[#ffbf00] mb-2 font-bold">
                   New Password
                 </label>
                 <div className="w-full relative">
@@ -41,7 +41,7 @@ function ResetPassword() {
                 </div>
               </div>
               <div className="w-full">
-                <label className="text-xl text-[#C9A961] mb-2 font-bold">
+                <label className="text-xl text-[#ffbf00] mb-2 font-bold">
                   Confirm New Password
                 </label>
                 <div className="w-full relative">
@@ -69,7 +69,7 @@ function ResetPassword() {
                 <button
                   onClick={() => navigate("/sign-in")}
                   type="button"
-                  className="w-1/3 bg-[#C9A961] text-white font-bold py-3 rounded-lg shadow-lg cursor-pointer mt-5"
+                  className="w-1/3 bg-[#ffbf00] text-white font-bold py-3 rounded-lg shadow-lg cursor-pointer mt-5"
                 >
                   Update Password
                 </button>

@@ -13,7 +13,7 @@ function ForgetPassword() {
             </div>
             <form className="space-y-5">
               <div>
-                <label className="text-xl text-[#C9A961] mb-2 font-bold">
+                <label className="text-xl text-[#ffbf00] mb-2 font-bold">
                   Email
                 </label>
                 <input
@@ -29,7 +29,7 @@ function ForgetPassword() {
                 <button
                   onClick={() => navigate("/verification-code")}
                   type="button"
-                  className="w-1/3 bg-[#C9A961] text-white font-bold py-3 rounded-lg shadow-lg cursor-pointer mt-5"
+                  className="w-1/3 bg-[#ffbf00] text-white font-bold py-3 rounded-lg shadow-lg cursor-pointer mt-5"
                 >
                   Send Code
                 </button>

@@ -12,7 +12,7 @@ function ProfilePage() {
   return (
     <div className="overflow-y-auto">
       <div className="px-5 pb-5 h-full">
-        <div className="bg-[#C9A961] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap md:flex-nowrap items-start md:items-center gap-2 md:gap-3">
+        <div className="bg-[#ffbf00] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap md:flex-nowrap items-start md:items-center gap-2 md:gap-3">
           <button
             onClick={() => navigate(-1)}
             className="text-white hover:opacity-90 transition"
@@ -24,9 +24,9 @@ function ProfilePage() {
         </div>
         <div className="mx-auto flex flex-col justify-center items-center">
           {/* Profile Picture Section */}
-          <div className="flex flex-col md:flex-row justify-center items-center bg-[#C9A961] mt-5 text-white w-full max-w-3xl mx-auto p-4 md:p-5 gap-4 md:gap-5 rounded-lg">
+          <div className="flex flex-col md:flex-row justify-center items-center bg-[#ffbf00] mt-5 text-white w-full max-w-3xl mx-auto p-4 md:p-5 gap-4 md:gap-5 rounded-lg">
             <div className="relative">
-              <div className="w-[122px] h-[122px] bg-[#C9A961] rounded-full border-4 border-white shadow-xl flex justify-center items-center">
+              <div className="w-[122px] h-[122px] bg-[#ffbf00] rounded-full border-4 border-white shadow-xl flex justify-center items-center">
                 <img
                   src="https://avatar.iran.liara.run/public/44"
                   alt="profile"

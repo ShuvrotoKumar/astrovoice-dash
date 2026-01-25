@@ -115,7 +115,7 @@ function Subscriptions() {
             <FiTrash2 className="h-5 w-5 text-red-600 cursor-pointer rounded-md" />
           </button>
           <button className="" onClick={() => showViewModal(record)}>
-            <FiEdit2 className="text-[#C9A961] w-5 h-5 cursor-pointer rounded-md" />
+            <FiEdit2 className="text-[#ffbf00] w-5 h-5 cursor-pointer rounded-md" />
           </button>
         </div>
       ),
@@ -141,7 +141,7 @@ function Subscriptions() {
       html: `Are you sure you want to cancel the subscription for <strong>${row.user}</strong>?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#C9A961',
+      confirmButtonColor: '#ffbf00',
       cancelButtonColor: '#6B7280',
       confirmButtonText: 'Yes, Cancel',
       cancelButtonText: 'No, Keep It',
@@ -153,7 +153,7 @@ function Subscriptions() {
           title: 'Cancelled!',
           text: `Subscription for ${row.user} has been cancelled.`,
           icon: 'success',
-          confirmButtonColor: '#C9A961',
+          confirmButtonColor: '#ffbf00',
           timer: 2000,
           timerProgressBar: true
         });
@@ -163,7 +163,7 @@ function Subscriptions() {
 
   return (
     <div>
-      <div className="bg-[#C9A961] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap md:flex-nowrap items-start md:items-center gap-2 md:gap-3">
+      <div className="bg-[#ffbf00] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap md:flex-nowrap items-start md:items-center gap-2 md:gap-3">
         <button
           onClick={() => navigate(-1)}
           className="text-white hover:opacity-90 transition"
@@ -211,7 +211,7 @@ function Subscriptions() {
           
           <button
             onClick={() => navigate('/add-subscription')}
-            className="bg-white text-[#C9A961] hover:bg-gray-100 px-4 py-2 rounded-md flex items-center gap-2 whitespace-nowrap"
+            className="bg-white text-[#ffbf00] hover:bg-gray-100 px-4 py-2 rounded-md flex items-center gap-2 whitespace-nowrap"
           >
             <IoAddOutline className="w-5 h-5" />
             <span>Add Subscription</span>
@@ -263,7 +263,7 @@ function Subscriptions() {
           {selectedSubscription && (
             <div className="relative">
               {/* Header with blue gradient */}
-              <div className="bg-[#C9A961] p-6 -m-6 mb-6 rounded-t-lg">
+              <div className="bg-[#ffbf00] p-6 -m-6 mb-6 rounded-t-lg">
                 <h2 className="text-3xl font-bold text-white mb-2">
                   {selectedSubscription.name}
                 </h2>
@@ -328,7 +328,7 @@ function Subscriptions() {
                     // Handle edit functionality
                     console.log('Edit subscription:', selectedSubscription);
                   }}
-                  className="bg-[#C9A961] text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+                  className="bg-[#ffbf00] text-white px-6 py-2 rounded-lg hover:bg-blue-700"
                 >
                   Save Changes
                 </button>

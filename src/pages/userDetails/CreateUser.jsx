@@ -16,7 +16,7 @@ export default function CreateUser() {
         icon: 'error',
         title: 'Missing Information',
         text: 'Please fill in all fields',
-        confirmButtonColor: '#C9A961'
+        confirmButtonColor: '#ffbf00'
       });
       return;
     }
@@ -25,7 +25,7 @@ export default function CreateUser() {
       icon: 'success',
       title: 'User Created Successfully',
       html: `<pre style="text-align: left; font-size: 12px;">${JSON.stringify({ fullName, role, clinic, email, phone, joined }, null, 2)}</pre>`,
-      confirmButtonColor: '#C9A961',
+      confirmButtonColor: '#ffbf00',
       timer: 3000,
       timerProgressBar: true
     }).then(() => {
@@ -35,32 +35,32 @@ export default function CreateUser() {
 
   return (
     <div className="p-5">
-      <div className="bg-[#C9A961] text-[#C9A961] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap items-start md:items-center gap-2 md:gap-3">
+      <div className="bg-[#ffbf00] text-[#ffbf00] px-4 md:px-5 py-3 rounded-md mb-3 flex flex-wrap items-start md:items-center gap-2 md:gap-3">
         <button
           onClick={() => navigate(-1)}
-          className="text-[#C9A961] hover:opacity-90 transition"
+          className="text-[#ffbf00] hover:opacity-90 transition"
           aria-label="Go back"
         >
           <IoChevronBack className="w-6 h-6" />
         </button>
-        <h1 className="text-[#C9A961] text-xl sm:text-2xl font-bold">Create User</h1>
+        <h1 className="text-[#ffbf00] text-xl sm:text-2xl font-bold">Create User</h1>
       </div>
 
-      <form onSubmit={save} className="bg-[#C9A961] text-white rounded-md shadow border border-gray-200 p-5">
+      <form onSubmit={save} className="bg-[#ffbf00] text-white rounded-md shadow border border-gray-200 p-5">
         <div className="grid grid-cols-1 gap-4">
           <div>
-            <label className="block bg-[#C9A961] text-[#C9A961] font-semibold text-gray-700 mb-1">Full Name</label>
+            <label className="block bg-[#ffbf00] text-[#ffbf00] font-semibold text-gray-700 mb-1">Full Name</label>
             <input
               type="text"
               value={form.fullName}
               onChange={(e) => setForm({ ...form, fullName: e.target.value })}
               placeholder="John Doe"
-              className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#C9A961]"
+              className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
             />
           </div>
 
           <div>
-            <label className="block text-[#C9A961] font-semibold text-gray-700 mb-1">Role</label>
+            <label className="block text-[#ffbf00] font-semibold text-gray-700 mb-1">Role</label>
             <Select
               className="w-full"
               placeholder="Select role"
@@ -79,40 +79,40 @@ export default function CreateUser() {
           </div>
 
           <div>
-            <label className="block text-[#C9A961] font-semibold text-gray-700 mb-1">Clinic</label>
+            <label className="block text-[#ffbf00] font-semibold text-gray-700 mb-1">Clinic</label>
             <input
               type="text"
               value={form.clinic}
               onChange={(e) => setForm({ ...form, clinic: e.target.value })}
               placeholder="Downtown Dental Clinic"
-              className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#C9A961]"
+              className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
             />
           </div>
 
           <div>
-            <label className="block text-[#C9A961] font-semibold text-gray-700 mb-1">Email</label>
+            <label className="block text-[#ffbf00] font-semibold text-gray-700 mb-1">Email</label>
             <input
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               placeholder="john@example.com"
-              className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#C9A961]"
+              className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
             />
           </div>
 
           <div>
-            <label className="block text-[#C9A961] font-semibold text-gray-700 mb-1">Phone No</label>
+            <label className="block text-[#ffbf00] font-semibold text-gray-700 mb-1">Phone No</label>
             <input
               type="text"
               value={form.phone}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
               placeholder="+1 987 654 3210"
-              className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#C9A961]"
+              className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
             />
           </div>
 
           <div>
-            <label className="block text-[#C9A961] font-semibold text-gray-700 mb-1">Joined Date</label>
+            <label className="block text-[#ffbf00] font-semibold text-gray-700 mb-1">Joined Date</label>
             <input
               type="date"
               value={form.joined}
@@ -122,7 +122,7 @@ export default function CreateUser() {
           </div>
 
           <div className="pt-2">
-            <button type="submit" className="w-full bg-[#C9A961] text-white font-semibold py-3 rounded-md">
+            <button type="submit" className="w-full bg-[#ffbf00] text-white font-semibold py-3 rounded-md">
               Create User
             </button>
           </div>

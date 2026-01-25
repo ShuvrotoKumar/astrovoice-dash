@@ -48,7 +48,7 @@ const TotalUser = () => {
     if (active && payload && payload.length) {
       const { month, netRevenue } = payload[0].payload;
       return (
-        <div className="custom-tooltip bg-white py-3 px-2 rounded text-[#C9A961]">
+        <div className="custom-tooltip bg-white py-3 px-2 rounded text-[#ffbf00]">
           <p className="label">{`Month: ${month}`}</p>
           <p className="label">{`Revenue: $${netRevenue}`}</p>
         </div>
@@ -66,26 +66,26 @@ const TotalUser = () => {
         >
           <defs>
             <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="[#C9A961]" stopOpacity={1} />
-              <stop offset="95%" stopColor="[#C9A961]" stopOpacity={0} />
+              <stop offset="5%" stopColor="[#ffbf00]" stopOpacity={1} />
+              <stop offset="95%" stopColor="[#ffbf00]" stopOpacity={0} />
             </linearGradient>
           </defs>
           <XAxis
             tickLine={false}
             dataKey="month"
-             className="text-[#C9A961]"
+             className="text-[#ffbf00]"
           />
 
           {/* <YAxis tickLine={true} /> */}
             <YAxis
                       tickLine={false}
-                      className="text-[#C9A961]"
+                      className="text-[#ffbf00]"
                     />
           <Tooltip content={<CustomTooltip />} />
           <Area
             type="monotone"
             dataKey="netRevenue"
-            stroke="[#C9A961]"
+            stroke="[#ffbf00]"
             fillOpacity={1}
             fill="url(#colorPv)"
           />
