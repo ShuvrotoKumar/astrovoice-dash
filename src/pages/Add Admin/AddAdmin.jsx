@@ -67,7 +67,7 @@ export default function AddAdmin() {
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="bg-white rounded-md shadow border border-gray-200 p-5 mb-5">
+      <form onSubmit={handleSubmit} className="bg-[#393d4a] rounded-md shadow border border-[#4a5060] p-5 mb-5">
         <div className="grid grid-cols-1 gap-4">
           <div>
             <label className="block text-sm font-semibold text-[#ffbf00] mb-1">Name</label>

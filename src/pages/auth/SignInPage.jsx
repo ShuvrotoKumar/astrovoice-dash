@@ -16,10 +16,10 @@ function SignInPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen flex items-center justify-center p-5">
+    <div className="bg-[#1f1f1f] min-h-screen flex items-center justify-center p-5">
       <div className="container mx-auto">
         <div className="flex  justify-center items-center">
-          <div className="w-full lg:w-1/2 bg-white p-5 md:px-18 md:py-28 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] rounded-2xl">
+          <div className="w-full lg:w-1/2 bg-[#393d4a] p-5 md:px-18 md:py-28 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] rounded-2xl">
             <div className="flex justify-center items-center mb-10">
               <img src="/logo.png" alt="" />
             </div>
@@ -118,7 +118,7 @@ function SignInPage() {
                     </svg>
                   )}
 
-                  <span className="text-xl text-[#424242]">
+                  <span className="text-xl text-black">
                     Remember Password
                   </span>
                 </label>

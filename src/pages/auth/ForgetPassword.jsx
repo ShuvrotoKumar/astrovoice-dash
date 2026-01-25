@@ -4,10 +4,10 @@ function ForgetPassword() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white min-h-screen flex items-center justify-center p-5">
+    <div className="bg-[#1f1f1f] min-h-screen flex items-center justify-center p-5">
       <div className="container mx-auto">
         <div className="flex  justify-center items-center ">
-          <div className="w-full md:w-1/2 lg:w-1/2 p-5 md:px-[100px] md:py-[200px] bg-white  shadow-[0px_10px_20px_rgba(0,0,0,0.2)] rounded-2xl">
+          <div className="w-full md:w-1/2 lg:w-1/2 p-5 md:px-[100px] md:py-[200px] bg-[#393d4a]  shadow-[0px_10px_20px_rgba(0,0,0,0.2)] rounded-2xl">
             <div className="flex justify-center items-center mb-10">
               <img src="/logo.png" alt="" />
             </div>
