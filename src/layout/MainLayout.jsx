@@ -55,7 +55,7 @@ const MainLayout = () => {
       <div className="flex flex-col w-full overflow-hidden">
         <MainHeader toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
         <main className="flex-1 overflow-auto p-4 lg:p-6">
-          <div className="bg-[#2a2a2a] rounded-lg shadow-sm min-h-[calc(100vh-2rem)] p-4 lg:p-6">
+          <div className="bg-[#393d4a] rounded-lg shadow-sm min-h-[calc(100vh-2rem)] p-4 lg:p-6">
             <Outlet />
           </div>
         </main>

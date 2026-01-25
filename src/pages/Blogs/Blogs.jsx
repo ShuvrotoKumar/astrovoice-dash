@@ -376,7 +376,7 @@ const Blogs = () => {
         theme={{
           components: {
             Table: {
-              headerBg: "#F2F2F2",
+              headerBg: "#393d4a",
               headerColor: "#000000",
               cellFontSize: 14,
               headerSplitColor: "#E5E7EB",

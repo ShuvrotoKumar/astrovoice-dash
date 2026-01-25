@@ -1,5 +1,3 @@
-rafce 
-
 import { useState, useMemo } from 'react';
 import { ConfigProvider, Modal, Table, Select, Input, Button } from "antd";
 import { IoSearch, IoChevronBack, IoAddOutline } from "react-icons/io5";
@@ -361,7 +359,7 @@ const Reports = () => {
         theme={{
           components: {
             Table: {
-              headerBg: "#F2F2F2",
+              headerBg: "#393d4a",
               headerColor: "#000000",
               cellFontSize: 14,
               headerSplitColor: "#E5E7EB",

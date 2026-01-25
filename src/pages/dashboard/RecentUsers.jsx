@@ -88,10 +88,14 @@ const RecentUsers = () => {
             },
 
             Table: {
-              headerBg: "[#ffbf00]",
-              headerColor: "[#ffbf00]",
+              headerBg: "#ffbf00",
+              headerColor: "#ffffff",
               cellFontSize: 16,
-              headerSplitColor: "[#ffbf00]",
+              headerSplitColor: "#393d4a",
+              colorBgContainer: "#393d4a",
+              colorText: "#ffffff",
+              rowHoverBg: "#4a5060",
+              borderColor: "#4a5060",
             },
           },
         }}
@@ -101,6 +105,7 @@ const RecentUsers = () => {
           columns={columns}
           pagination={false}
           scroll={{ x: "max-content" }}
+          className="bg-[#393d4a]"
         />
       </ConfigProvider>
     </>

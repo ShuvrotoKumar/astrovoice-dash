@@ -22,6 +22,7 @@ import Notifications from "../pages/Notifications/Notifications";
 import Subscriptions from "../pages/subscriptions/Subscriptions";
 import Chat from "../pages/Chat/Chat";
 import Blogs from "../pages/Blogs/Blogs";
+import Reports from "../pages/Reports/Reports";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/reports",
+        element: <Reports />,
       },
       {
         path: "/settings",

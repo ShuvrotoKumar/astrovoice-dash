@@ -32,7 +32,7 @@ function DashboardPage() {
         ].map((stat, index, array) => (
           <div 
             key={stat.label}
-            className={`bg-[#F2F2F2] p-4 rounded-lg flex flex-col items-center justify-center min-h-[120px] ${
+            className={`bg-[#393d4a] p-4 rounded-lg flex flex-col items-center justify-center min-h-[120px] ${
               index < array.length - 1 ? 'md:border-r-2 md:border-[#ffbf00]' : ''
             }`}
           >
@@ -43,7 +43,7 @@ function DashboardPage() {
       </div>
 
       {/* User Growth Section */}
-      <div className="w-full bg-[#F2F2F2] rounded-lg shadow-md p-4 md:p-6">
+      <div className="w-full bg-[#393d4a] rounded-lg shadow-md p-4 md:p-6">
         <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between md:items-center mb-6">
           <h1 className="text-xl text-[#ffbf00] font-semibold">User Growth</h1>
           <div className="relative w-full md:w-40">
