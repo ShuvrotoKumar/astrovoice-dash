@@ -183,7 +183,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
           >
-            <MdAdminPanelSettings className="w-5 h-5" />
+            <TbReport className="w-5 h-5" />
             <p className="text-lg font-semibold">Reports</p>
           </li>
         </Link>
