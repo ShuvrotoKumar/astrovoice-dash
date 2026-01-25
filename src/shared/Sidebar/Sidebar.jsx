@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
   return (
     <div
-      className={`bg-[#fff] text-#C9A961 border border-[#E5E7EB] h-screen overflow-y-auto py-5 md:py-0 z-50 transition-transform shadow-lg my-5 rounded-lg shadow-[0_0_10px_0_rgba(0,0,0,0.1)]
+      className={`bg-[#393d4a] text-white border border-[#E5E7EB] h-screen overflow-y-auto py-5 md:py-0 z-50 transition-transform shadow-lg my-5 rounded-lg shadow-[0_0_10px_0_rgba(0,0,0,0.1)]
         w-[80%] sm:w-[70%] md:w-[60%] lg:w-70 xl:w-72
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         fixed top-0 left-0
@@ -51,7 +51,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li
             className={`flex items-center gap-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/")
-                ? "bg-[#C9A961] text-white px-3 py-3 rounded-lg"
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "hover:bg-gray-100 px-3 py-3 rounded-lg"
             }`}
           >
@@ -64,7 +64,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/user-details")
-                ? "bg-[#C9A961] text-white px-3 py-3 rounded-lg"
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "hover:bg-gray-100 px-3 py-3 rounded-lg"
             }`}
           >
@@ -78,7 +78,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/earnings")
-                ? "bg-[#C9A961] text-white px-3 py-3 rounded-lg"
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "hover:bg-gray-100 px-3 py-3 rounded-lg"
             }`}
           >
@@ -92,7 +92,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/subscriptions")
-                ? "bg-[#C9A961] text-white px-3 py-3 rounded-lg"
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "hover:bg-gray-100 px-3 py-3 rounded-lg"
             }`}
           >
@@ -107,7 +107,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/categories")
-                ? "bg-[#C9A961] text-white px-3 py-3 rounded-lg"
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "hover:bg-gray-100 px-3 py-3 rounded-lg"
             }`}
           >
@@ -136,7 +136,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/invoices")
-                ? "bg-[#C9A961] text-white px-3 py-3 rounded-lg"
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "hover:bg-gray-100 px-3 py-3 rounded-lg"
             }`}
           >
@@ -149,7 +149,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/chat")
-                ? "bg-[#C9A961] text-white px-3 py-3 rounded-lg"
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "hover:bg-gray-100 px-3 py-3 rounded-lg"
             }`}
           >
@@ -164,7 +164,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/create-admin")
-                ? "bg-[#C9A961] text-white px-3 py-3 rounded-lg"
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "hover:bg-gray-100 px-3 py-3 rounded-lg"
             }`}
           >
@@ -178,7 +178,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/blogs")
-                ? "bg-[#C9A961] text-white px-3 py-3 rounded-lg"
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "hover:bg-gray-100 px-3 py-3 rounded-lg"
             }`}
           >
@@ -190,7 +190,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/settings")
-                ? "bg-[#C9A961] text-white px-3 py-3 rounded-lg"
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "hover:bg-gray-100 px-3 py-3 rounded-lg"
             }`}
           >
@@ -201,7 +201,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       </ul>
 
       {/* Logout Button */}
-      <div className="absolute mt-8 md:mt-20 mmd:mt-20 w-full px-5 text-[#C9A961]">
+      <div className="absolute mt-8 md:mt-20 mmd:mt-20 w-full px-5 text-[#ffbe00]">
         <Link to="/sign-in">
           <button className="flex items-center gap-4 w-full py-3 rounded-lg bg-red-500  px-3 duration-200 text-white justify-center ">
             <IoLogOutOutline className="w-5 h-5 font-bold" />

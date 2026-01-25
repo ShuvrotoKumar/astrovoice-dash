@@ -16,4 +16,5 @@ body {
   /* Allow page to scroll when needed while keeping a stable gutter */
   overflow-y: auto;
   min-height: 100dvh;
+  background-color: #1f1f1f;
 }

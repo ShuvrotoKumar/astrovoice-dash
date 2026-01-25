@@ -30,14 +30,14 @@ const MainHeader = ({ toggleSidebar }) => {
 
   return (
     <div className="relative w-full px-5">
-      <header className="shadow-sm rounded-lg border border-[#E5E7EB] overflow-hidden">
+      <header className="shadow-sm rounded-lg border border-[#E5E7EB] overflow-hidden bg-[#393d4a]">
         <div className="flex justify-between items-center px-5 md:px-10 h-[80px]">
           <button
             onClick={toggleSidebar}
             aria-label="Toggle sidebar"
             className="p-2 rounded hover:opacity-80 focus:outline-none"
           >
-            <IoMenu className="w-8 h-8 text-[#C9A961]" />
+            <IoMenu className="w-8 h-8 text-[#ffbe00]" />
           </button>
           <div className="flex items-center gap-3">
             {/* Notification */}
@@ -45,10 +45,10 @@ const MainHeader = ({ toggleSidebar }) => {
               type="button"
               aria-label="Notifications"
               onClick={() => navigate('/notifications')}
-              className="relative p-2 rounded-full border border-[#C9A961] hover:bg-white/60 transition"
+              className="relative p-2 rounded-full border border-[#ffbe00] hover:bg-white/60 transition"
             >
-              <IoNotificationsOutline className="w-6 h-6 text-[#C9A961]" />
-              <span className="absolute -top-0.5 -right-0.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-[#C9A961] text-white text-[10px] px-1 leading-none">3</span>
+              <IoNotificationsOutline className="w-6 h-6 text-[#ffbe00]" />
+              <span className="absolute -top-0.5 -right-0.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-[#ffbe00] text-white text-[10px] px-1 leading-none">3</span>
             </button>
 
             {/* Profile */}
@@ -62,10 +62,10 @@ const MainHeader = ({ toggleSidebar }) => {
                 alt="User Avatar"
               />
               <div>
-                <h3 className="hidden md:block text-[#C9A961] text-lg font-semibold">
+                <h3 className="hidden md:block text-[#ffbe00] text-lg font-semibold">
                   Mr. Admin
                 </h3>
-                <p className="text-[#C9A961] text-lg font-semibold">Admin</p>
+                <p className="text-[#ffbe00] text-lg font-semibold">Admin</p>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@ const MainHeader = ({ toggleSidebar }) => {
         >
           <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl h-[80vh] flex flex-col overflow-hidden">
             {/* Chat Header */}
-            <div className="bg-gradient-to-r from-[#C9A961] to-blue-700 text-white p-4 flex justify-between items-center">
+            <div className="bg-gradient-to-r from-[#ffbe00] to-blue-700 text-white p-4 flex justify-between items-center">
               <h3 className="text-lg font-semibold">Messages</h3>
               <div className="flex items-center space-x-4">
                 <button 
