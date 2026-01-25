@@ -4,6 +4,28 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { IoChevronBack } from "react-icons/io5";
 
+// Add custom styles for ReactQuill toolbar
+const quillStyles = `
+  .ql-toolbar .ql-stroke {
+    stroke: black !important;
+  }
+  .ql-toolbar .ql-fill {
+    fill: black !important;
+  }
+  .ql-toolbar .ql-picker {
+    color: black !important;
+  }
+  .ql-toolbar button {
+    color: black !important;
+  }
+  .ql-toolbar .ql-picker-label {
+    color: black !important;
+  }
+  .ql-toolbar .ql-picker-options {
+    color: black !important;
+  }
+`;
+
 function AboutUs() {
   const [content, setContent] = useState(
     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum."
@@ -11,7 +33,9 @@ function AboutUs() {
   const navigate = useNavigate();
 
   return (
-    <div className="p-5">
+    <>
+      <style>{quillStyles}</style>
+      <div className="p-5">
       <div className="bg-[#ffbf00] px-5 py-3 rounded-md mb-3 flex items-center gap-3">
         <button
           onClick={() => navigate(-1)}
@@ -23,9 +47,9 @@ function AboutUs() {
         <h1 className="text-white text-2xl font-bold">About Us</h1>
       </div>
 
-      <div className=" bg-white rounded shadow p-5 h-full">
+      <div className=" bg-[#393d4a] rounded shadow p-5 h-full border border-[#4a5060]">
         <ReactQuill
-          style={{ padding: "10px" }}
+          style={{ padding: "10px", color: "black" }}
           theme="snow"
           value={content}
           onChange={setContent}
@@ -40,6 +64,7 @@ function AboutUs() {
         </button>
       </div>
     </div>
+    </>
   );
 }
 
