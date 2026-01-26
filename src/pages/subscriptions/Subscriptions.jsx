@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 function Subscriptions() {
   const navigate = useNavigate();
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedSubscription, setSelectedSubscription] = useState(null);
   const [statusFilter, setStatusFilter] = useState();
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,6 +23,14 @@ function Subscriptions() {
   const handleViewCancel = () => {
     setIsViewModalOpen(false);
     setSelectedSubscription(null);
+  };
+
+  const showAddModal = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const handleAddCancel = () => {
+    setIsAddModalOpen(false);
   };
 
   const [dataSource, setDataSource] = useState([
@@ -210,7 +219,7 @@ function Subscriptions() {
           />
           
           <button
-            onClick={() => navigate('/add-subscription')}
+            onClick={showAddModal}
             className="bg-white text-[#ffbf00] hover:bg-gray-100 px-4 py-2 rounded-md flex items-center gap-2 whitespace-nowrap"
           >
             <IoAddOutline className="w-5 h-5" />
@@ -340,6 +349,96 @@ function Subscriptions() {
               </div>
             </div>
           )}
+        </Modal>
+
+        {/* Add Subscription Modal */}
+        <Modal
+          title={<span style={{ color: "white" }}>Add New Subscription</span>}
+          open={isAddModalOpen}
+          onCancel={handleAddCancel}
+          styles={{ content: { backgroundColor: "#393d4a" }, header: { backgroundColor: "#393d4a" } }}
+          footer={[
+            <button
+              key="cancel"
+              onClick={handleAddCancel}
+              className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+            >
+              Cancel
+            </button>,
+            <button
+              key="save"
+              onClick={() => {
+                // Handle save functionality
+                console.log('Save new subscription');
+                handleAddCancel();
+              }}
+              className="bg-[#ffbf00] text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+            >
+              Add Subscription
+            </button>
+          ]}
+          width={800}
+        >
+          <div className="space-y-4 bg-[#393d4a] p-4 rounded-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Plan Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter plan name"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
+                />
+              </div>
+              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
+                <label className="block text-sm font-medium text-gray-700 mb-1">User</label>
+                <input
+                  type="text"
+                  placeholder="Enter user name"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
+                />
+              </div>
+              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>
+                <input
+                  type="text"
+                  placeholder="Enter price"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
+                />
+              </div>
+              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]">
+                  <option value="">Select status</option>
+                  <option value="Active">Active</option>
+                  <option value="Expired">Expired</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </div>
+              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                <input
+                  type="date"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
+                />
+              </div>
+              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
+                <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                <input
+                  type="date"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
+                />
+              </div>
+              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Payment Method</label>
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]">
+                  <option value="">Select payment method</option>
+                  <option value="Credit Card">Credit Card</option>
+                  <option value="PayPal">PayPal</option>
+                  <option value="Bank Transfer">Bank Transfer</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </Modal>
       </ConfigProvider>
     </div>
