@@ -361,7 +361,7 @@ function Subscriptions() {
             <button
               key="cancel"
               onClick={handleAddCancel}
-              className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+              className="px-6 py-2 border border-gray-300 rounded-lg text-white"
             >
               Cancel
             </button>,
