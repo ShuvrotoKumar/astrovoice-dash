@@ -32,9 +32,7 @@ function DashboardPage() {
         ].map((stat, index, array) => (
           <div 
             key={stat.label}
-            className={`bg-[#393d4a] p-4 rounded-lg flex flex-col items-center justify-center min-h-[120px] ${
-              index < array.length - 1 ? 'md:border-r-2 md:border-[#ffbf00]' : ''
-            }`}
+            className="bg-[#393d4a] p-4 rounded-lg flex flex-col items-center justify-center min-h-[120px] border-2 border-[#ffbf00]"
           >
             <p className="text-[#ffbf00] text-2xl md:text-3xl font-bold">{stat.value}</p>
             <p className="text-[#ffbf00] text-lg md:text-xl font-semibold text-center">{stat.label}</p>
