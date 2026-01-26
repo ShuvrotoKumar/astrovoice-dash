@@ -50,7 +50,7 @@ function ChangePass() {
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="**********"
-              className="w-full border border-gray-300 rounded-md outline-none px-4 py-3 placeholder:text-sm md:placeholder:text-base focus:ring-2 focus:ring-[#74AA2E]"
+              className="w-full bg-[#393d4a] border border-gray-300 rounded-md outline-none px-4 py-3 placeholder:text-sm md:placeholder:text-base focus:ring-2 focus:ring-[#74AA2E]"
               required
             />
             <button
@@ -78,7 +78,7 @@ function ChangePass() {
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="**********"
-              className="w-full border border-gray-300 rounded-md outline-none px-4 py-3 placeholder:text-sm md:placeholder:text-base focus:ring-2 focus:ring-[#74AA2E]"
+              className="w-full bg-[#393d4a] border border-gray-300 rounded-md outline-none px-4 py-3 placeholder:text-sm md:placeholder:text-base focus:ring-2 focus:ring-[#74AA2E]"
               required
             />
             <button
