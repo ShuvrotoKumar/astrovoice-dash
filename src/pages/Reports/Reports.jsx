@@ -483,7 +483,7 @@ const Reports = () => {
               </Select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <label className="block text-sm font-medium text-white mb-1">Status</label>
               <Select
                 value={formData.status}
                 onChange={(value) => setFormData(prev => ({ ...prev, status: value }))}
@@ -500,9 +500,10 @@ const Reports = () => {
 
         {/* Add New Report Modal */}
         <Modal
-          title="Add New Report"
+          title={<span style={{ color: "white" ,backgroundColor: "#393d4a"}}>Add New Report</span>}
           open={isAddModalOpen}
           onCancel={() => setIsAddModalOpen(false)}
+          styles={{ content: { backgroundColor: "#393d4a" }, header: { backgroundColor: "#393d4a" } }}
           footer={[
             <Button key="cancel" onClick={() => setIsAddModalOpen(false)}>
               Cancel
@@ -519,7 +520,7 @@ const Reports = () => {
         >
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+              <label className="block text-sm font-medium text-white mb-1">Title</label>
               <Input
                 value={formData.title}
                 onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
@@ -527,11 +528,11 @@ const Reports = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+              <label className="block text-sm font-medium text-white mb-1">Type</label>
               <Select
                 value={formData.type}
                 onChange={(value) => setFormData(prev => ({ ...prev, type: value }))}
-                className="w-full"
+                className="w-full text-white"
               >
                 <Select.Option value="Analytics">Analytics</Select.Option>
                 <Select.Option value="Financial">Financial</Select.Option>
@@ -541,11 +542,11 @@ const Reports = () => {
               </Select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <label className="block text-sm font-medium text-white mb-1">Status</label>
               <Select
                 value={formData.status}
                 onChange={(value) => setFormData(prev => ({ ...prev, status: value }))}
-                className="w-full"
+                className="w-full text-white"
               >
                 <Select.Option value="Completed">Completed</Select.Option>
                 <Select.Option value="Pending">Pending</Select.Option>
