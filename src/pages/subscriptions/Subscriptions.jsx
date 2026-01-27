@@ -333,7 +333,7 @@ function Subscriptions() {
               <div className="flex justify-end items-center mt-8 pt-6 border-t border-gray-200 gap-3">
                 <button
                   onClick={handleViewCancel}
-                  className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                  className="px-6 py-2 border border-gray-300 rounded-lg text-white"
                 >
                   Close
                 </button>
