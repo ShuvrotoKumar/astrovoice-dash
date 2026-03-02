@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { LuUsers } from "react-icons/lu";
 import { TbReport } from "react-icons/tb";
@@ -9,16 +9,35 @@ import {
   MdAdminPanelSettings,
 } from "react-icons/md";
 import { BsBookmarkCheck, BsCreditCard } from "react-icons/bs";
+import { useLogoutMutation } from "../../redux/api/authApi";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/Slice/authSlice";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname;
   const isActive = (path) => currentPath === path;
+  const dispatch = useDispatch();
+  const [logoutApi, { isLoading }] = useLogoutMutation();
   
   // Close sidebar when a link is clicked on mobile
   const handleLinkClick = () => {
     if (window.innerWidth < 1024) {
       toggleSidebar();
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logoutApi().unwrap();
+      dispatch(logout());
+      navigate('/sign-in');
+    } catch (err) {
+      console.error('Logout failed:', err);
+      // Even if API call fails, clear local state and navigate
+      dispatch(logout());
+      navigate('/sign-in');
     }
   };
 
@@ -215,12 +234,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
       {/* Logout Button */}
       <div className="absolute mt-8 md:mt-20 mmd:mt-20 w-full px-5 text-[#ffbe00]">
-        <Link to="/sign-in">
-          <button className="flex items-center gap-4 w-full py-3 rounded-lg bg-red-500  px-3 duration-200 text-white justify-center ">
-            <IoLogOutOutline className="w-5 h-5 font-bold" />
-            <span>Logout</span>
-          </button>
-        </Link>
+        <button 
+          onClick={handleLogout}
+          disabled={isLoading}
+          className="flex items-center gap-4 w-full py-3 rounded-lg bg-red-500 px-3 duration-200 text-white justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <IoLogOutOutline className="w-5 h-5 font-bold" />
+          <span>{isLoading ? 'Logging out...' : 'Logout'}</span>
+        </button>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import SignInPage from "../pages/auth/SignInPage";
 import ForgetPassword from "../pages/auth/ForgetPassword";
 import VerificationCode from "../pages/auth/VerificationCode";
@@ -26,6 +26,10 @@ import Reports from "../pages/Reports/Reports";
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <Navigate to="/sign-in" replace />,
+  },
+  {
     path: "/sign-in",
     element: <SignInPage />,
   },
@@ -43,89 +47,89 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/",
+    path: "/dashboard",
     element: <MainLayout />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <DashboardPage />,
       },
       {
-        path: "/user-details",
+        path: "user-details",
         element: <UserDetails />,
       },
 
     
      
       {
-        path: "/create-user",
+        path: "create-user",
         element: <CreateUser />,
       },
 
       // settings
       {
-        path: "/privacy-policy",
+        path: "privacy-policy",
         element: <PrivacyPolicy />,
       },
       {
-        path: "/terms-and-condition",
+        path: "terms-and-condition",
         element: <TermsCondition />,
       },
       {
-        path: "/blogs",
+        path: "blogs",
         element: <Blogs />,
       },
       {
-        path: "/reports",
+        path: "reports",
         element: <Reports />,
       },
       {
-        path: "/settings",
+        path: "settings",
         element: <Settings />,
       },
       {
-        path: "/edit-profile",
+        path: "edit-profile",
         element: <EditProfile />,
       },
       {
-        path: "/change-password",
+        path: "change-password",
         element: <ChangePass />,
       },
       {
-        path: "/about-us",
+        path: "about-us",
         element: <AboutUs />,
       },
       {
-        path: "/create-admin",
+        path: "create-admin",
         element: <CreateAdmin />,
       },
       {
-        path: "/add-admin",
+        path: "add-admin",
         element: <AddAdmin />,
       },
       {
-        path: "/chat",
+        path: "chat",
         element: <Chat />,
       },
       {
-        path: "/notifications",
+        path: "notifications",
         element: <Notifications />,
       },
       {
-        path: "/profile",
+        path: "profile",
         element: <ProfilePage />,
       },
   
       {
-        path:"/categories",
+        path:"categories",
         element:<Categories/>
       },
       {
-        path:"/earnings",
+        path:"earnings",
         element:<Earnings/>
       }, 
       {
-        path:"/subscriptions",
+        path:"subscriptions",
         element:<Subscriptions/>
       }, 
       // {

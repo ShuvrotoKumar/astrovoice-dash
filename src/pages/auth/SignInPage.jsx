@@ -1,17 +1,52 @@
 import { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
+import { useLogInMutation } from "../../redux/api/authApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/Slice/authSlice";
 
 function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  const [logIn, { isLoading, error }] = useLogInMutation();
 
   const handleCheckboxChange = (event) => {
     if (event.target.checked) {
       setIsChecked(true);
     } else {
       setIsChecked(false);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    const email = formData.get('email');
+    const password = formData.get('password');
+    
+    try {
+      const result = await logIn({ email, password }).unwrap();
+      
+      // Store tokens in localStorage
+      localStorage.setItem('accessToken', result.data.accessToken);
+      localStorage.setItem('refreshToken', result.data.refreshToken);
+      
+      // Dispatch user data to Redux store
+      dispatch(setUser({
+        user: result.data.admin,
+        token: result.data.accessToken
+      }));
+      
+      // Navigate to dashboard or home
+      navigate('/dashboard');
+      
+    } catch (err) {
+      console.error('Login failed:', err);
+      // Handle error (show error message to user)
     }
   };
 
@@ -23,7 +58,7 @@ function SignInPage() {
             <div className="flex justify-center items-center mb-10">
               <img src="/logo.png" alt="" />
             </div>
-            <form className="space-y-5">
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <div className="w-full">
                 <label className="text-xl text-[#ffbf00] mb-2 font-bold">
                   Email
@@ -128,13 +163,19 @@ function SignInPage() {
               </div>
               <div className="flex justify-center items-center">
                 <button
-                  onClick={() => navigate("/")}
-                  type="button"
-                  className="w-1/3 bg-[#ffbf00] text-white font-bold py-3 rounded-lg shadow-lg cursor-pointer mt-5"
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-1/3 bg-[#ffbf00] text-white font-bold py-3 rounded-lg shadow-lg cursor-pointer mt-5 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Log In
+                  {isLoading ? 'Logging in...' : 'Log In'}
                 </button>
               </div>
+              
+              {error && (
+                <div className="text-red-500 text-center mt-4">
+                  {error.data?.message || 'Login failed. Please try again.'}
+                </div>
+              )}
             </form>
           </div>
         </div>
