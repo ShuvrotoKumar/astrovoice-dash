@@ -23,11 +23,20 @@ import Subscriptions from "../pages/subscriptions/Subscriptions";
 import Chat from "../pages/Chat/Chat";
 import Blogs from "../pages/Blogs/Blogs";
 import Reports from "../pages/Reports/Reports";
+import Card from "../pages/card/Card";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Navigate to="/sign-in" replace />,
+  },
+  {
+    path: "/user-details",
+    element: <Navigate to="/dashboard/user-details" replace />,
+  },
+  {
+    path: "/card",
+    element: <Navigate to="/dashboard/card" replace />,
   },
   {
     path: "/sign-in",
@@ -59,7 +68,10 @@ const router = createBrowserRouter([
         element: <UserDetails />,
       },
 
-    
+      {
+        path: "card",
+        element: <Card />,
+      },
      
       {
         path: "create-user",

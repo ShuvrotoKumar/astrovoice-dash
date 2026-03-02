@@ -64,12 +64,12 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       </div>
 
       {/* Sidebar Menu */}
-      <ul className="mt-10 px-5 text-[10px]">
+       <ul className="mt-10 px-5 text-[10px]">
         {/* Dashboard Page */}
-        <Link to="/" onClick={handleLinkClick}>
+        <Link to="/dashboard" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/")
+              isActive("/dashboard")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
@@ -79,10 +79,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </li>
         </Link>
         {/* User Management */}
-        <Link to="/user-details" onClick={handleLinkClick}>
+        <Link to="/dashboard/user-details" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/user-details")
+              isActive("/dashboard/user-details")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
@@ -92,6 +92,18 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </li>
         </Link>
 
+              <Link to="/dashboard/card" onClick={handleLinkClick}>
+          <li
+            className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/card")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <TbReport className="w-5 h-5" />
+            <p className="text-lg font-semibold">Energy Card</p>
+          </li>
+        </Link> 
         {/* Earnings */}
         {/* <Link to="/earnings" onClick={handleLinkClick}>
           <li
@@ -107,7 +119,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         </Link> */}
 
         {/* Subscriptions */}
-        <Link to="/subscriptions" onClick={handleLinkClick}>
+        {/* <Link to="/subscriptions" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/subscriptions")
@@ -118,7 +130,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <BsCreditCard className="w-5 h-5" />
             <p className="text-lg font-semibold">Subscriptions</p>
           </li>
-        </Link>
+        </Link> */}
 
         
         {/* Categories */}
@@ -179,7 +191,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
 
         {/* Create Admin */}
-        <Link to="/create-admin">
+        {/* <Link to="/create-admin">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/create-admin")
@@ -190,11 +202,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <MdAdminPanelSettings className="w-5 h-5" />
             <p className="text-lg font-semibold">Create Admin</p>
           </li>
-        </Link>
+        </Link> */}
 
           {/*Reports*/}
 
-      <Link to="/reports">
+      {/* <Link to="/reports">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/reports")
@@ -205,7 +217,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <TbReport className="w-5 h-5" />
             <p className="text-lg font-semibold">Reports</p>
           </li>
-        </Link>
+        </Link> */}
         {/* <Link to="/blogs">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
@@ -218,7 +230,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <p className="text-lg font-semibold">Blogs</p>
           </li>
         </Link> */}
-        <Link to="/settings">
+        {/* <Link to="/settings">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/settings")
@@ -230,7 +242,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <p className="text-lg font-semibold">Settings</p>
           </li>
         </Link>
-      </ul>
+        */}
+      </ul> 
 
       {/* Logout Button */}
       <div className="absolute mt-8 md:mt-20 mmd:mt-20 w-full px-5 text-[#ffbe00]">
