@@ -8,9 +8,11 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: getBaseUrl(),
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token;
+      const token =
+        getState().auth.token ||
+        document.cookie.match(/(?:^|; )accessToken=([^;]*)/)?.[1];
       if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
+        headers.set("Authorization", `Bearer ${decodeURIComponent(token)}`);
       }
       return headers;
     },
@@ -34,5 +36,6 @@ export const baseApi = createApi({
     "listings",
     "notification",
     "NDA",
+    "EnergyCard",
   ],
 });

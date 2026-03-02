@@ -33,7 +33,7 @@ const authApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
         headers: {
-          Authorization: localStorage.getItem("resetToken"),
+          Authorization: document.cookie.match(/(?:^|; )resetToken=([^;]*)/)?.[1] ?? "",
         },
       }),
 

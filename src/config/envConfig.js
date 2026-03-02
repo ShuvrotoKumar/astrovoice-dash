@@ -3,9 +3,9 @@
 // export const pdfUrl = "http://10.10.20.57:8001";
 // export const imageUrl = "http://10.10.20.57:8001/uploads";
 
-export const url = "https://megy-ai-backend.onrender.com/api/v1/";
-export const pdfUrl = "https://megy-ai-backend.onrender.com";
-export const imageUrl = "https://megy-ai-backend.onrender.com/uploads";
+export const url = import.meta.env.VITE_URL;
+export const pdfUrl = import.meta.env.VITE_PDF_URL;
+export const imageUrl = import.meta.env.VITE_IMAGE_URL;
 
 export const getBaseUrl = () => {
   return url;

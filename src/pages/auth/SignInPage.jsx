@@ -4,13 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLogInMutation } from "../../redux/api/authApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/Slice/authSlice";
+import { storeUserToken, storeRefreshToken } from "../../services/auth.service";
 
 function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const [logIn, { isLoading, error }] = useLogInMutation();
 
   const handleCheckboxChange = (event) => {
@@ -23,27 +24,27 @@ function SignInPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData(e.target);
     const email = formData.get('email');
     const password = formData.get('password');
-    
+
     try {
       const result = await logIn({ email, password }).unwrap();
-      
-      // Store tokens in localStorage
-      localStorage.setItem('accessToken', result.data.accessToken);
-      localStorage.setItem('refreshToken', result.data.refreshToken);
-      
+
+      // Store tokens in cookies
+      storeUserToken({ accessToken: result.data.accessToken });
+      storeRefreshToken({ refreshToken: result.data.refreshToken });
+
       // Dispatch user data to Redux store
       dispatch(setUser({
         user: result.data.admin,
         token: result.data.accessToken
       }));
-      
+
       // Navigate to dashboard or home
       navigate('/dashboard');
-      
+
     } catch (err) {
       console.error('Login failed:', err);
       // Handle error (show error message to user)
@@ -170,7 +171,7 @@ function SignInPage() {
                   {isLoading ? 'Logging in...' : 'Log In'}
                 </button>
               </div>
-              
+
               {error && (
                 <div className="text-red-500 text-center mt-4">
                   {error.data?.message || 'Login failed. Please try again.'}
