@@ -55,6 +55,7 @@ const router = createBrowserRouter([
     element: <ResetPassword />,
   },
 
+
   {
     path: "/dashboard",
     element: <MainLayout />,
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
         path: "card",
         element: <Card />,
       },
-     
+
       {
         path: "create-user",
         element: <CreateUser />,
@@ -131,7 +132,7 @@ const router = createBrowserRouter([
         path: "profile",
         element: <ProfilePage />,
       },
-  
+
       {
         path:"categories",
         element:<Categories/>
@@ -139,11 +140,11 @@ const router = createBrowserRouter([
       {
         path:"earnings",
         element:<Earnings/>
-      }, 
+      },
       {
         path:"subscriptions",
         element:<Subscriptions/>
-      }, 
+      },
       // {
       //   path:"/chat",
       //   element:<Chat/>

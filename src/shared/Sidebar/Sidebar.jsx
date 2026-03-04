@@ -12,6 +12,7 @@ import { BsBookmarkCheck, BsCreditCard } from "react-icons/bs";
 import { useLogoutMutation } from "../../redux/api/authApi";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/Slice/authSlice";
+import Swal from 'sweetalert2';
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const isActive = (path) => currentPath === path;
   const dispatch = useDispatch();
   const [logoutApi, { isLoading }] = useLogoutMutation();
-  
+
   // Close sidebar when a link is clicked on mobile
   const handleLinkClick = () => {
     if (window.innerWidth < 1024) {
@@ -28,17 +29,27 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await logoutApi().unwrap();
-      dispatch(logout());
-      navigate('/sign-in');
-    } catch (err) {
-      console.error('Logout failed:', err);
-      // Even if API call fails, clear local state and navigate
-      dispatch(logout());
-      navigate('/sign-in');
-    }
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure you want to logout?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ffbf00",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Logout",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await logoutApi().unwrap();
+          dispatch(logout());
+          navigate("/sign-in");
+        } catch (err) {
+          console.error("Logout failed:", err);
+          dispatch(logout());
+          navigate("/sign-in");
+        }
+      }
+    });
   };
 
   return (
@@ -103,7 +114,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <TbReport className="w-5 h-5" />
             <p className="text-lg font-semibold">Energy Card</p>
           </li>
-        </Link> 
+        </Link>
         {/* Earnings */}
         {/* <Link to="/earnings" onClick={handleLinkClick}>
           <li
@@ -132,7 +143,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </li>
         </Link> */}
 
-        
+
         {/* Categories */}
         {/* <Link to="/categories" onClick={handleLinkClick}>
           <li
@@ -175,7 +186,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <p className="text-lg font-semibold">Invoices</p>
           </li>
         </Link> */}
-        
+
          {/* <Link to="/chat" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
@@ -243,11 +254,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </li>
         </Link>
         */}
-      </ul> 
+      </ul>
 
       {/* Logout Button */}
       <div className="absolute mt-8 md:mt-20 mmd:mt-20 w-full px-5 text-[#ffbe00]">
-        <button 
+        <button
           onClick={handleLogout}
           disabled={isLoading}
           className="flex items-center gap-4 w-full py-3 rounded-lg bg-red-500 px-3 duration-200 text-white justify-center disabled:opacity-50 disabled:cursor-not-allowed"

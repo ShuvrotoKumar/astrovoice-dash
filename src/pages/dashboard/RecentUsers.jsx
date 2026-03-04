@@ -1,53 +1,9 @@
 import { ConfigProvider, Table } from "antd";
+import { useRecentUsersQuery } from "../../redux/api/userApi";
 
 const RecentUsers = () => {
-  const dataSource = [
-    {
-      key: "1",
-      fullName: "John Doe",
-      role: "Dentist",
-      clinic: "Downtown Dental Clinic",
-      email: "john@example.com",
-      phone: "+1 987 654 3210",
-      joined: "2024-01-12",
-    },
-    {
-      key: "2",
-      fullName: "Emma Smith",
-      role: "Practice Nurse",
-      clinic: "Smile Care Clinic",
-      email: "emma@example.com",
-      phone: "+1 987 654 3211",
-      joined: "2024-03-28",
-    },
-    {
-      key: "3",
-      fullName: "Liam Johnson",
-      role: "Practice Manager",
-      clinic: "Healthy Teeth Clinic",
-      email: "liam@example.com",
-      phone: "+1 987 654 3212",
-      joined: "2024-06-15",
-    },
-    {
-      key: "4",
-      fullName: "Olivia Brown",
-      role: "Lab Technician",
-      clinic: "City Dental Center",
-      email: "olivia@example.com",
-      phone: "+1 987 654 3213",
-      joined: "2024-08-02",
-    },
-    {
-      key: "5",
-      fullName: "Noah Davis",
-      role: "Lab Manager",
-      clinic: "Prime Smiles",
-      email: "noah@example.com",
-      phone: "+1 987 654 3214",
-      joined: "2024-09-10",
-    },
-  ];
+  const { data, isLoading } = useRecentUsersQuery();
+  const dataSource = data?.data?.users || data?.users || data?.data || [];
 
   const columns = [
     {
@@ -58,12 +14,12 @@ const RecentUsers = () => {
     },
     {
       title: "Full Name",
-      dataIndex: "fullName",
-      key: "fullName",
+      dataIndex: "fullname",
+      key: "fullname",
       render: (value, record) => (
         <div className="flex items-center gap-3">
           <img
-            src={`https://avatar.iran.liara.run/public/${record.key}`}
+            src={record.avatar ? `${import.meta.env.VITE_IMAGE_URL}/${record.avatar}` : `https://avatar.iran.liara.run/public/${record._id}`}
             className="w-10 h-10 object-cover rounded-full"
             alt="User Avatar"
           />
@@ -74,8 +30,13 @@ const RecentUsers = () => {
     // { title: "Role", dataIndex: "role", key: "role" },
     // { title: "Clinic", dataIndex: "clinic", key: "clinic" },
     { title: "Email", dataIndex: "email", key: "email" },
-    { title: "Phone No", dataIndex: "phone", key: "phone" },
-    { title: "Joined Date", dataIndex: "joined", key: "joined" },
+    { title: "Phone No", dataIndex: "mobile", key: "mobile" },
+    {
+      title: "Joined Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (date) => date ? new Date(date).toLocaleDateString() : 'N/A'
+    },
   ];
 
   return (
@@ -103,6 +64,7 @@ const RecentUsers = () => {
         <Table
           dataSource={dataSource}
           columns={columns}
+          loading={isLoading}
           pagination={false}
           scroll={{ x: "max-content" }}
           className="bg-[#393d4a]"

@@ -53,7 +53,7 @@ const MainHeader = ({ toggleSidebar }) => {
 
             {/* Profile */}
             <div
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/dashboard/profile")}
               className="flex items-center gap-2 cursor-default"
             >
               <img
@@ -74,7 +74,7 @@ const MainHeader = ({ toggleSidebar }) => {
 
       {/* Chat Overlay */}
       {showChat && (
-        <div 
+        <div
           ref={chatRef}
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
           onClick={(e) => e.target === e.currentTarget && setShowChat(false)}
@@ -84,7 +84,7 @@ const MainHeader = ({ toggleSidebar }) => {
             <div className="bg-gradient-to-r from-[#ffbe00] to-blue-700 text-white p-4 flex justify-between items-center">
               <h3 className="text-lg font-semibold">Messages</h3>
               <div className="flex items-center space-x-4">
-                <button 
+                <button
                   onClick={() => setShowChat(false)}
                   className="text-white hover:text-gray-200 focus:outline-none"
                 >
@@ -92,7 +92,7 @@ const MainHeader = ({ toggleSidebar }) => {
                 </button>
               </div>
             </div>
-            
+
             {/* Chat Content */}
             <div className="flex-1 overflow-hidden flex">
               <Chat isEmbedded={true} />

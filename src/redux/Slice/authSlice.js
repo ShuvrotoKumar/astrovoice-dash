@@ -15,10 +15,10 @@ export const authSlice = createSlice({
       state.token = token;
       // console.log("token", token);
     },
-    // logout: (state) => {
-    //   state.user = null;
-    //   state.token = null;
-    // },
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+    },
   },
 });
 

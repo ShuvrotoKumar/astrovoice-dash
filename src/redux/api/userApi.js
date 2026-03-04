@@ -2,50 +2,92 @@ import { baseApi } from "./baseApi";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllUser: builder.query({
+    allUsers: builder.query({
       query: (params) => ({
-        url: "dashboard/get-all-user",
+        url: "/users/all",
         method: "GET",
-        params: {
-          ...params,
-        },
+        params,
       }),
-      providesTags: ["user"],
+      providesTags: ["User"],
     }),
-    getSingleUser: builder.query({
-      query: ({ userId }) => ({
-        url: "dashboard/users-business-statistics",
+    recentUsers: builder.query({
+      query: (params) => ({
+        url: "/users/all?page=1&limit=5",
         method: "GET",
-        params: {
-          userId,
-        },
+        params,
       }),
-      providesTags: ["user"],
+      providesTags: ["User"],
     }),
-    updateUser: builder.mutation({
-      query: (userId) => {
-        return {
-          url: `dashboard/block-user?userId=${userId}`,
-          method: "PATCH",
-        };
-      },
-      invalidatesTags: ["user"],
+    singleUser: builder.query({
+      query: ({ id }) => ({
+        url: `/users/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["User"],
+    }),
+    blockUser: builder.mutation({
+      query: ({ id }) => ({
+        url: `/users/${id}/block`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["User"],
+    }),
+    unblockUser: builder.mutation({
+      query: ({ id }) => ({
+        url: `/users/${id}/unblock`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["User"],
+    }),
+    allBlockedUsers: builder.query({
+      query: () => ({
+        url: "/users/blocked",
+        method: "GET",
+      }),
+      providesTags: ["User"],
     }),
     deleteUser: builder.mutation({
-      query: (userId) => ({
-        url: `dashboard/delete-user/${userId}`,
+      query: ({ id }) => ({
+        url: `/users/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["user"],
+      invalidatesTags: ["User"],
     }),
-    
+    totalUser: builder.query({
+      query: () => ({
+        url: `/users/total`,
+        method: "GET",
+      }),
+      providesTags: ["User"],
+    }),
+    searchUsers: builder.query({
+      query: (params) => ({
+        url: "/users/search",
+        method: "GET",
+        params,
+      }),
+      providesTags: ["User"],
+    }),
+    userGrowth: builder.query({
+      query: (params) => ({
+        url: "/users/growth",
+        method: "GET",
+        params,
+      }),
+      providesTags: ["User"],
+    }),
   }),
 });
 
 export const {
-  useGetAllUserQuery,
-  useGetAllUserListQuery,
-  useGetSingleUserQuery,
-  useUpdateUserMutation,
+  useAllUsersQuery,
+  useSingleUserQuery,
+  useBlockUserMutation,
+  useUnblockUserMutation,
+  useAllBlockedUsersQuery,
   useDeleteUserMutation,
+  useTotalUserQuery,
+  useSearchUsersQuery,
+  useRecentUsersQuery,
+  useUserGrowthQuery,
 } = userApi;
