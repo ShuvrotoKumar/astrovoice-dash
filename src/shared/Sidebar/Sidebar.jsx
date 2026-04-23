@@ -116,7 +116,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </li>
         </Link>
         {/* Earnings */}
-        {/* <Link to="/earnings" onClick={handleLinkClick}>
+     <Link to="/earnings" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/earnings")
@@ -127,10 +127,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <BsCurrencyDollar className="w-5 h-5" />
             <p className="text-lg font-semibold">Earnings</p>
           </li>
-        </Link> */}
+        </Link> 
 
         {/* Subscriptions */}
-        {/* <Link to="/subscriptions" onClick={handleLinkClick}>
+        <Link to="/subscriptions" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/subscriptions")
@@ -141,11 +141,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <BsCreditCard className="w-5 h-5" />
             <p className="text-lg font-semibold">Subscriptions</p>
           </li>
-        </Link> */}
+        </Link>
 
 
         {/* Categories */}
-        {/* <Link to="/categories" onClick={handleLinkClick}>
+        <Link to="/categories" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/categories")
@@ -156,11 +156,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <BiCategory className="w-5 h-5" />
             <p className="text-lg font-semibold">Categories</p>
           </li>
-        </Link> */}
+        </Link>
 
 
         {/* Lab Management */}
-        {/* <Link to="/payment-management" onClick={handleLinkClick}>
+        <Link to="/payment-management" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/payment-management")
@@ -171,10 +171,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <RiFlaskLine className="w-5 h-5" />
             <p className="text-lg font-semibold whitespace-nowrap">Payments</p>
           </li>
-        </Link> */}
+        </Link>
 
         {/* Invoices */}
-        {/* <Link to="/invoices" onClick={handleLinkClick}>
+        <Link to="/invoices" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/invoices")
@@ -185,9 +185,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <BsReceipt className="w-5 h-5" />
             <p className="text-lg font-semibold">Invoices</p>
           </li>
-        </Link> */}
+        </Link>  
 
-         {/* <Link to="/chat" onClick={handleLinkClick}>
+         <Link to="/chat" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/chat")
@@ -198,11 +198,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <BiCategory className="w-5 h-5" />
             <p className="text-lg font-semibold">Chat</p>
           </li>
-        </Link> */}
+        </Link> 
 
 
         {/* Create Admin */}
-        {/* <Link to="/create-admin">
+         <Link to="/create-admin">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/create-admin")
@@ -213,11 +213,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <MdAdminPanelSettings className="w-5 h-5" />
             <p className="text-lg font-semibold">Create Admin</p>
           </li>
-        </Link> */}
+        </Link> 
 
-          {/*Reports*/}
-
-      {/* <Link to="/reports">
+        {/*Reports*/}
+        <Link to="/reports">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/reports")
@@ -228,8 +227,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <TbReport className="w-5 h-5" />
             <p className="text-lg font-semibold">Reports</p>
           </li>
-        </Link> */}
-        {/* <Link to="/blogs">
+        </Link> 
+         <Link to="/blogs">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/blogs")
@@ -240,8 +239,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <TbReport className="w-5 h-5" />
             <p className="text-lg font-semibold">Blogs</p>
           </li>
-        </Link> */}
-        {/* <Link to="/settings">
+        </Link>
+        <Link to="/settings">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/settings")
@@ -253,7 +252,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <p className="text-lg font-semibold">Settings</p>
           </li>
         </Link>
-        */}
+        
       </ul>
 
       {/* Logout Button */}
