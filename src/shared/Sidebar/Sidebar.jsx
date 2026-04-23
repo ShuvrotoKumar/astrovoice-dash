@@ -8,7 +8,9 @@ import { IoCloseSharp, IoLogOutOutline } from "react-icons/io5";
 import {
   MdAdminPanelSettings,
 } from "react-icons/md";
-import { BsBookmarkCheck, BsCreditCard } from "react-icons/bs";
+import { BsCreditCard, BsCurrencyDollar, BsReceipt } from "react-icons/bs";
+import { BiCategory } from "react-icons/bi";
+import { RiFlaskLine } from "react-icons/ri";
 import { useLogoutMutation } from "../../redux/api/authApi";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/Slice/authSlice";
