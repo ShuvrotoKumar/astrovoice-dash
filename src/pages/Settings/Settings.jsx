@@ -16,7 +16,7 @@ export default function Settings() {
           {/* Edit Profile */}
           <li>
             <Link
-              to="/profile"
+              to="/dashboard/profile"
               className="flex items-center justify-between px-5 py-4 hover:bg-[#4a5060] transition"
             >
               <span className="text-white text-base">Edit Profile</span>
@@ -26,7 +26,7 @@ export default function Settings() {
           {/* Privacy Policy */}
           <li>
             <Link
-              to="/privacy-policy"
+              to="/dashboard/privacy-policy"
               className="flex items-center justify-between px-5 py-4 hover:bg-[#4a5060] transition"
             >
               <span className="text-white text-base">Privacy Policy</span>
@@ -36,7 +36,7 @@ export default function Settings() {
           {/* Terms & Conditions */}
           <li>
             <Link
-              to="/terms-and-condition"
+              to="/dashboard/terms-and-condition"
               className="flex items-center justify-between px-5 py-4 hover:bg-[#4a5060] transition"
             >
               <span className="text-white text-base">
@@ -48,7 +48,7 @@ export default function Settings() {
           {/* About Us */}
           <li>
             <Link
-              to="/about-us"
+              to="/dashboard/about-us"
               className="flex items-center justify-between px-5 py-4 hover:bg-[#4a5060] transition"
             >
               <span className="text-white text-base">About Us</span>

@@ -118,10 +118,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </li>
         </Link>
         {/* Earnings */}
-     <Link to="/earnings" onClick={handleLinkClick}>
+     <Link to="/dashboard/earnings" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/earnings")
+              isActive("/dashboard/earnings")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
@@ -132,10 +132,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         </Link> 
 
         {/* Subscriptions */}
-        <Link to="/subscriptions" onClick={handleLinkClick}>
+        <Link to="/dashboard/subscriptions" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/subscriptions")
+              isActive("/dashboard/subscriptions")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
@@ -147,10 +147,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
 
         {/* Categories */}
-        <Link to="/categories" onClick={handleLinkClick}>
+        <Link to="/dashboard/categories" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/categories")
+              isActive("/dashboard/categories")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
@@ -162,10 +162,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
 
         {/* Lab Management */}
-        <Link to="/payment-management" onClick={handleLinkClick}>
+        <Link to="/dashboard/payment-management" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/payment-management")
+              isActive("/dashboard/payment-management")
                 ? "bg-#ffbf00 text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
@@ -176,10 +176,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         </Link>
 
         {/* Invoices */}
-        <Link to="/invoices" onClick={handleLinkClick}>
+        <Link to="/dashboard/invoices" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/invoices")
+              isActive("/dashboard/invoices")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
@@ -189,10 +189,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </li>
         </Link>  
 
-         <Link to="/chat" onClick={handleLinkClick}>
+         <Link to="/dashboard/chat" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/chat")
+              isActive("/dashboard/chat")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
@@ -204,10 +204,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
 
         {/* Create Admin */}
-         <Link to="/create-admin">
+         <Link to="/dashboard/create-admin">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/create-admin")
+              isActive("/dashboard/create-admin")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
@@ -218,10 +218,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         </Link> 
 
         {/*Reports*/}
-        <Link to="/reports">
+        <Link to="/dashboard/reports">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/reports")
+              isActive("/dashboard/reports")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
@@ -230,10 +230,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <p className="text-lg font-semibold">Reports</p>
           </li>
         </Link> 
-         <Link to="/blogs">
+         <Link to="/dashboard/blogs">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/blogs")
+              isActive("/dashboard/blogs")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}
@@ -242,10 +242,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <p className="text-lg font-semibold">Blogs</p>
           </li>
         </Link>
-        <Link to="/settings">
+        <Link to="/dashboard/settings">
           <li
             className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
-              isActive("/settings")
+              isActive("/dashboard/settings")
                 ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
                 : "[#ffbe00] px-3 py-3 rounded-lg"
             }`}

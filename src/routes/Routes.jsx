@@ -24,6 +24,8 @@ import Chat from "../pages/Chat/Chat";
 import Blogs from "../pages/Blogs/Blogs";
 import Reports from "../pages/Reports/Reports";
 import Card from "../pages/card/Card";
+import Invoices from "../pages/Invoices/Invoices";
+import PaymentManagement from "../pages/PaymentManagement/PaymentManagement";
 
 const router = createBrowserRouter([
   {
@@ -144,6 +146,14 @@ const router = createBrowserRouter([
       {
         path:"subscriptions",
         element:<Subscriptions/>
+      },
+      {
+        path:"invoices",
+        element:<Invoices/>
+      },
+      {
+        path:"payment-management",
+        element:<PaymentManagement/>
       },
       // {
       //   path:"/chat",
