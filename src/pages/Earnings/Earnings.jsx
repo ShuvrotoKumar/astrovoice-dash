@@ -31,7 +31,7 @@ const Earnings = () => {
     .reduce((sum, tx) => sum + tx.amount, 0);
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 min-h-screen">
       <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6">
         <h1 className="text-2xl font-semibold text-gray-800 mb-4 md:mb-0">Earnings</h1>
         <div className="flex flex-col sm:flex-row gap-3">

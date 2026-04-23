@@ -1,13 +1,69 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCamera } from "react-icons/fa";
 import EditProfile from "./EditProfile";
 import ChangePass from "./ChangePass";
 import { IoChevronBack } from "react-icons/io5";
+import { useMeQuery, useAvatarMutation } from "../../redux/api/adminApi";
+import { getImageUrl } from "../../config/envConfig";
+import Swal from 'sweetalert2';
 
 function ProfilePage() {
   const [activeTab, setActiveTab] = useState("editProfile");
   const navigate = useNavigate();
+  const { data: meData, isLoading, error, refetch } = useMeQuery();
+  const [updateAvatar, { isLoading: isUploadingAvatar }] = useAvatarMutation();
+  const fileInputRef = useRef(null);
+
+  // Log for debugging
+  console.log("ProfilePage Me API Data:", meData);
+  console.log("ProfilePage Me API Error:", error);
+  console.log("ProfilePage Avatar URL:", meData?.data?.admin?.avatar);
+
+  const admin = meData?.data?.admin;
+  const adminName = admin?.fullname || "Shah Aman";
+  const adminRole = admin?.role || "Admin";
+  const adminAvatar = admin?.avatar
+    ? `${getImageUrl(admin.avatar)}?t=${new Date(admin.updatedAt).getTime()}`
+    : "https://avatar.iran.liara.run/public/44";
+
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Create FormData for file upload
+    const formData = new FormData();
+    formData.append('avatar', file);
+
+    try {
+      const result = await updateAvatar(formData).unwrap();
+      console.log("Avatar upload result:", result);
+      // Force refetch to get updated data
+      await refetch();
+      console.log("Refetch completed");
+      Swal.fire({
+        icon: 'success',
+        title: 'Avatar Updated',
+        text: 'Your profile picture has been updated successfully.',
+        confirmButtonColor: '#ffbf00',
+        timer: 2000,
+        timerProgressBar: true
+      });
+    } catch (error) {
+      console.error("Avatar upload error:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Upload Failed',
+        text: error?.data?.message || 'Failed to update avatar. Please try again.',
+        confirmButtonColor: '#ffbf00'
+      });
+    }
+
+    // Reset file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
 
   return (
     <div className="overflow-y-auto">
@@ -24,11 +80,16 @@ function ProfilePage() {
         </div>
         <div className="mx-auto flex flex-col justify-center items-center">
           {/* Profile Picture Section */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4 w-full max-w-3xl">
+              Error loading profile: {error?.message || error?.data?.message || 'Failed to fetch profile'}
+            </div>
+          )}
           <div className="flex flex-col md:flex-row justify-center items-center bg-[#ffbf00] mt-5 text-white w-full max-w-3xl mx-auto p-4 md:p-5 gap-4 md:gap-5 rounded-lg">
             <div className="relative">
               <div className="w-[122px] h-[122px] bg-[#ffbf00] rounded-full border-4 border-white shadow-xl flex justify-center items-center">
                 <img
-                  src="https://avatar.iran.liara.run/public/44"
+                  src={adminAvatar}
                   alt="profile"
                   className="h-30 w-32 rounded-full"
                 />
@@ -37,13 +98,25 @@ function ProfilePage() {
                   <label htmlFor="profilePicUpload" className="cursor-pointer">
                     <FaCamera className="text-[#575757]" />
                   </label>
-                  <input type="file" id="profilePicUpload" className="hidden" />
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    id="profilePicUpload"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleAvatarChange}
+                    disabled={isUploadingAvatar}
+                  />
                 </div>
               </div>
             </div>
             <div className="text-center md:text-left">
-              <p className="text-lg sm:text-xl md:text-3xl font-bold">Shah Aman</p>
-              <p className="text-base sm:text-lg font-semibold">Admin</p>
+              <p className="text-lg sm:text-xl md:text-3xl font-bold">
+                {isLoading ? "Loading..." : adminName}
+              </p>
+              <p className="text-base sm:text-lg font-semibold capitalize">
+                {isLoading ? "..." : adminRole}
+              </p>
             </div>
           </div>
 

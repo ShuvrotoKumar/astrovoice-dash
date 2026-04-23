@@ -1,99 +1,42 @@
 import { ConfigProvider, Table } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useMemo } from "react";
 import {
   IoChevronBack,
   IoAddOutline,
 } from "react-icons/io5";
-import Swal from 'sweetalert2';
+import { useGetAllAdminQuery } from "../../redux/api/adminApi";
 
 export default function CreateAdmin() {
   const navigate = useNavigate();
+  const { data: adminData, isLoading, error } = useGetAllAdminQuery();
 
-  const [dataSource, setDataSource] = useState([
-    {
-      key: "1",
-      no: "1",
-      name: "John Admin",
-      email: "john@tdk.com",
-      password: "********",
-      designation: "Super Admin",
-    },
-    {
-      key: "2",
-      no: "2",
-      name: "Jane Admin",
-      email: "jane@tdk.com",
-      password: "********",
-      designation: "Admin",
-    },
-    {
-      key: "3",
-      no: "3",
-      name: "Sam Manager",
-      email: "sam@tdk.com",
-      password: "********",
-      designation: "Admin",
-    },
-  ]);
+  // Log for debugging
+  console.log("Admin API Data:", adminData);
+  console.log("Admin API Error:", error);
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!form.name || !form.email || !form.password || !form.confirmPassword) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Missing Information',
-        text: 'Please fill in all fields',
-        confirmButtonColor: '#ffbf00'
-      });
-      return;
+  const dataSource = useMemo(() => {
+    if (!adminData?.data) return [];
+    try {
+      return adminData.data.map((admin, index) => ({
+        key: admin._id || String(index),
+        no: String(index + 1),
+        name: admin.fullname || admin.name || 'Unknown',
+        email: admin.email || 'N/A',
+        password: "********",
+        designation: admin.role || admin.designation || 'N/A',
+      }));
+    } catch (err) {
+      console.error("Error mapping admin data:", err);
+      return [];
     }
-    if (form.password !== form.confirmPassword) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Password Mismatch',
-        text: 'Passwords do not match',
-        confirmButtonColor: '#ffbf00'
-      });
-      return;
-    }
-    
-    const nextNo = String(dataSource.length + 1);
-    const newRow = {
-      key: nextNo,
-      no: nextNo,
-      name: form.name,
-      email: form.email,
-      password: "********",
-      designation: "Admin",
-    };
-    setDataSource((prev) => [newRow, ...prev]);
-    setForm({ name: "", email: "", password: "", confirmPassword: "" });
-    setImagePreview("");
-    if (fileInputRef.current) fileInputRef.current.value = "";
-    
-    Swal.fire({
-      icon: 'success',
-      title: 'Admin Added Successfully',
-      text: `${form.name} has been added to the admin list.`,
-      confirmButtonColor: '#ffbf00',
-      timer: 2000,
-      timerProgressBar: true
-    });
-  };
+  }, [adminData]);
 
   const columns = [
-    { title: "No", dataIndex: "no", key: "no" },
+    { title: "No", dataIndex: "no", key: "no", width: 80 },
     { title: "Name", dataIndex: "name", key: "name" },
     { title: "Email", dataIndex: "email", key: "email" },
-    { title: "Password", dataIndex: "password", key: "password" },
+    { title: "Password", dataIndex: "password", key: "password", width: 120 },
     { title: "Designation", dataIndex: "designation", key: "designation" },
   ];
 
@@ -143,9 +86,15 @@ export default function CreateAdmin() {
           },
         }}
       >
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+            Error loading admins: {error?.message || error?.data?.message || 'Failed to fetch admins'}
+          </div>
+        )}
         <Table
           dataSource={dataSource}
           columns={columns}
+          loading={isLoading}
           pagination={{ pageSize: 10 }}
           scroll={{ x: "max-content" }}
           className="bg-[#393d4a]"

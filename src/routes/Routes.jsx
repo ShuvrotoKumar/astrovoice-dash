@@ -41,6 +41,10 @@ const router = createBrowserRouter([
     element: <Navigate to="/dashboard/card" replace />,
   },
   {
+    path: "/add-admin",
+    element: <Navigate to="/dashboard/add-admin" replace />,
+  },
+  {
     path: "/sign-in",
     element: <SignInPage />,
   },
@@ -151,10 +155,10 @@ const router = createBrowserRouter([
         path:"invoices",
         element:<Invoices/>
       },
-      {
-        path:"payment-management",
-        element:<PaymentManagement/>
-      },
+      // {
+      //   path:"payment-management",
+      //   element:<PaymentManagement/>
+      // },
       // {
       //   path:"/chat",
       //   element:<Chat/>

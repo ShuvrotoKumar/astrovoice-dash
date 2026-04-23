@@ -1,23 +1,23 @@
-// import { baseApi } from "./baseApi";
+import { baseApi } from "./baseApi";
 
-// const privacyApi = baseApi.injectEndpoints({
-//   endpoints: (builder) => ({
-//     getPrivacy: builder.query({
-//       query: () => ({
-//         url: "home/get-privacy-policy",
-//         method: "GET",
-//       }),
-//       providesTags: ["privacy"],
-//     }),
-//     updatePrivacy: builder.mutation({
-//       query: ({ requestData }) => ({
-//         url: "home/update-privacy-policy",
-//         method: "PATCH",
-//         body: requestData,
-//       }),
-//       invalidatesTags: ["privacy"],
-//     }),
-//   }),
-// });
+const privacyApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    getPrivacy: builder.query({
+      query: () => ({
+        url: "home/get-privacy-policy",
+        method: "GET",
+      }),
+      providesTags: ["privacy"],
+    }),
+    updatePrivacy: builder.mutation({
+      query: ({ requestData }) => ({
+        url: "legal-docs/privacy-policy",
+        method: "PATCH",
+        body: requestData,
+      }),
+      invalidatesTags: ["privacy"],
+    }),
+  }),
+});
 
-// export const { useGetPrivacyQuery, useUpdatePrivacyMutation } = privacyApi;
+export const { useGetPrivacyQuery, useUpdatePrivacyMutation } = privacyApi;

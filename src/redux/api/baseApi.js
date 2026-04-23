@@ -8,11 +8,15 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: getBaseUrl(),
     prepareHeaders: (headers, { getState }) => {
-      const token =
-        getState().auth.token ||
-        document.cookie.match(/(?:^|; )accessToken=([^;]*)/)?.[1];
-      if (token) {
-        headers.set("Authorization", `Bearer ${decodeURIComponent(token)}`);
+      try {
+        const token =
+          getState().auth.token ||
+          document.cookie.match(/(?:^|; )accessToken=([^;]*)/)?.[1];
+        if (token) {
+          headers.set("Authorization", `Bearer ${decodeURIComponent(token)}`);
+        }
+      } catch (error) {
+        console.error("Error preparing headers:", error);
       }
       return headers;
     },
@@ -37,5 +41,6 @@ export const baseApi = createApi({
     "notification",
     "NDA",
     "EnergyCard",
+    "blog",
   ],
 });

@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { IoChevronBack } from "react-icons/io5";
+import { useGetPrivacyQuery, useUpdatePrivacyMutation } from "../../redux/api/privacyApi";
+import Swal from 'sweetalert2';
 
 // Add custom styles for ReactQuill toolbar
 const quillStyles = `
@@ -27,10 +29,49 @@ const quillStyles = `
 `;
 
 export default function PrivacyPolicy() {
-  const [content, setContent] = useState(
-    "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum."
-  );
   const navigate = useNavigate();
+  const { data: privacyData, isLoading: isFetching } = useGetPrivacyQuery();
+  const [updatePrivacy, { isLoading: isUpdating }] = useUpdatePrivacyMutation();
+  const [content, setContent] = useState("");
+
+  // Set content from API data when fetched
+  useEffect(() => {
+    if (privacyData?.data?.content) {
+      setContent(privacyData.data.content);
+    }
+  }, [privacyData]);
+
+  const handleSave = async () => {
+    if (!content.trim()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Empty Content',
+        text: 'Privacy policy content cannot be empty',
+        confirmButtonColor: '#ffbf00'
+      });
+      return;
+    }
+
+    try {
+      await updatePrivacy({ requestData: { content } }).unwrap();
+      Swal.fire({
+        icon: 'success',
+        title: 'Saved',
+        text: 'Privacy policy has been updated successfully',
+        confirmButtonColor: '#ffbf00',
+        timer: 2000,
+        timerProgressBar: true
+      });
+    } catch (error) {
+      console.error('Privacy update error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Save Failed',
+        text: error?.data?.message || 'Failed to update privacy policy',
+        confirmButtonColor: '#ffbf00'
+      });
+    }
+  };
 
   return (
     <>
@@ -48,19 +89,24 @@ export default function PrivacyPolicy() {
       </div>
 
       <div className="bg-[#393d4a] rounded shadow p-5 h-full border border-[#4a5060]">
-        <ReactQuill
-          style={{ color: "black" }}
-          theme="snow"
-          value={content}
-          onChange={setContent}
-        />
+        {isFetching ? (
+          <div className="text-white text-center py-10">Loading privacy policy...</div>
+        ) : (
+          <ReactQuill
+            style={{ color: "black" }}
+            theme="snow"
+            value={content}
+            onChange={setContent}
+          />
+        )}
       </div>
       <div className="text-center py-5 w-full">
         <button
-          onClick={() => console.log(content)}
-          className="bg-[#ffbf00] text-white font-semibold w-full py-2 rounded transition duration-200"
+          onClick={handleSave}
+          disabled={isUpdating || isFetching}
+          className="bg-[#ffbf00] text-white font-semibold w-full py-2 rounded transition duration-200 disabled:opacity-50"
         >
-          Save changes
+          {isUpdating ? 'Saving...' : 'Save changes'}
         </button>
       </div>
     </div>

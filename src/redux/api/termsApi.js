@@ -1,26 +1,35 @@
-// import { baseApi } from "./baseApi";
+import { baseApi } from "./baseApi";
 
-// const termsAndConditionsApi = baseApi.injectEndpoints({
-//   endpoints: (builder) => ({
-//     getTermsAndConditions: builder.query({
-//       query: () => ({
-//         url: "home/get-terms-condition",
-//         method: "GET",
-//       }),
-//       providesTags: ["termsAndConditions"],
-//     }),
-//     updateTermsAndConditions: builder.mutation({
-//       query: ({ requestData }) => ({
-//         url: "home/update-terms-condition",
-//         method: "PATCH",
-//         body: requestData,
-//       }),
-//       invalidatesTags: ["termsAndConditions"],
-//     }),
-//   }),
-// });
+const termsAndConditionsApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    getTermsAndConditions: builder.query({
+      query: () => ({
+        url: "legal-docs/terms-conditions",
+        method: "GET",
+      }),
+      providesTags: ["termsAndConditions"],
+    }),
+    updateTermsAndConditions: builder.mutation({
+      query: ({ requestData }) => ({
+        url: "legal-docs/terms-conditions",
+        method: "PATCH",
+        body: requestData,
+      }),
+      invalidatesTags: ["termsAndConditions"],
+    }),
+    aboutUs: builder.mutation({
+      query: ({ requestData }) => ({
+        url: "legal-docs/about-us",
+        method: "PATCH",
+        body: requestData,
+      }),
+      invalidatesTags: ["aboutUs"],
+    }),
+  }),
+});
 
-// export const {
-//   useGetTermsAndConditionsQuery,
-//   useUpdateTermsAndConditionsMutation,
-// } = termsAndConditionsApi;
+export const {
+  useGetTermsAndConditionsQuery,
+  useUpdateTermsAndConditionsMutation,
+  useAboutUsMutation,
+} = termsAndConditionsApi;

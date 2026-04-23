@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { IoChevronBack } from "react-icons/io5";
+import { useAboutUsMutation } from "../../redux/api/termsApi";
+import Swal from 'sweetalert2';
 
 // Add custom styles for ReactQuill toolbar
 const quillStyles = `
@@ -27,10 +29,41 @@ const quillStyles = `
 `;
 
 function AboutUs() {
-  const [content, setContent] = useState(
-    "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum."
-  );
   const navigate = useNavigate();
+  const [aboutUs, { isLoading: isUpdating }] = useAboutUsMutation();
+  const [content, setContent] = useState("");
+
+  const handleSave = async () => {
+    if (!content.trim()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Empty Content',
+        text: 'About Us content cannot be empty',
+        confirmButtonColor: '#ffbf00'
+      });
+      return;
+    }
+
+    try {
+      await aboutUs({ requestData: { content } }).unwrap();
+      Swal.fire({
+        icon: 'success',
+        title: 'Saved',
+        text: 'About Us has been updated successfully',
+        confirmButtonColor: '#ffbf00',
+        timer: 2000,
+        timerProgressBar: true
+      });
+    } catch (error) {
+      console.error('About Us update error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Save Failed',
+        text: error?.data?.message || 'Failed to update About Us',
+        confirmButtonColor: '#ffbf00'
+      });
+    }
+  };
 
   return (
     <>
@@ -57,10 +90,11 @@ function AboutUs() {
       </div>
       <div className="text-center py-5">
         <button
-          onClick={() => console.log(content)}
-          className="bg-[#ffbf00] text-white font-semibold w-full py-2 rounded transition duration-200"
+          onClick={handleSave}
+          disabled={isUpdating}
+          className="bg-[#ffbf00] text-white font-semibold w-full py-2 rounded transition duration-200 disabled:opacity-50"
         >
-          Save changes
+          {isUpdating ? 'Saving...' : 'Save changes'}
         </button>
       </div>
     </div>

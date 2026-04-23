@@ -4,11 +4,25 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoMenu, IoNotificationsOutline, IoClose } from "react-icons/io5";
 import Chat from "../../pages/Chat/Chat";
+import { useMeQuery } from "../../redux/api/adminApi";
+import { getImageUrl } from "../../config/envConfig";
 
 const MainHeader = ({ toggleSidebar }) => {
   const navigate = useNavigate();
   const [showChat, setShowChat] = useState(false);
   const chatRef = useRef(null);
+  const { data: meData, isLoading, error } = useMeQuery();
+
+  // Log for debugging
+  console.log("Header Me API Data:", meData);
+  console.log("Header Me API Error:", error);
+
+  const admin = meData?.data?.admin;
+  const adminName = admin?.fullname || "Mr. Admin";
+  const adminRole = admin?.role || "Admin";
+  const adminAvatar = admin?.avatar
+    ? `${getImageUrl(admin.avatar)}?t=${new Date(admin.updatedAt).getTime()}`
+    : "https://avatar.iran.liara.run/public/31";
 
   // Close chat when clicking outside
   useEffect(() => {
@@ -57,15 +71,17 @@ const MainHeader = ({ toggleSidebar }) => {
               className="flex items-center gap-2 cursor-default"
             >
               <img
-                src="https://avatar.iran.liara.run/public/31"
+                src={adminAvatar}
                 className="w-8 md:w-12 h-8 md:h-12 object-cover rounded-full"
                 alt="User Avatar"
               />
               <div>
                 <h3 className="hidden md:block text-[#ffbe00] text-lg font-semibold">
-                  Mr. Admin
+                  {isLoading ? "Loading..." : adminName}
                 </h3>
-                <p className="text-[#ffbe00] text-lg font-semibold">Admin</p>
+                <p className="text-[#ffbe00] text-lg font-semibold capitalize">
+                  {isLoading ? "..." : adminRole}
+                </p>
               </div>
             </div>
           </div>
