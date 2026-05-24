@@ -47,6 +47,11 @@ function SignInPage() {
 
     } catch (err) {
       console.error('Login failed:', err);
+      console.error('Error details:', {
+        status: err?.status,
+        data: err?.data,
+        message: err?.message
+      });
       // Handle error (show error message to user)
     }
   };
