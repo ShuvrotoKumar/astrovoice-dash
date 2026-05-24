@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { useMeQuery } from "../../redux/api/adminApi";
+import { useMeQuery, useProfileMutation } from "../../redux/api/adminApi";
+import Swal from 'sweetalert2';
 
 function EditProfile() {
-  const { data: meData, isLoading, error } = useMeQuery();
+  const { data: meData, isLoading, error, refetch } = useMeQuery();
+  const [updateProfile, { isLoading: isUpdatingProfile }] = useProfileMutation();
   const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    contactNo: "",
+    fullname: "",
+    mobile: "",
   });
 
   // Log for debugging
@@ -16,18 +17,43 @@ function EditProfile() {
   const admin = meData?.data?.admin;
 
   // Populate form when admin data is loaded
-  if (admin && !form.fullName) {
+  if (admin && !form.fullname) {
     setForm({
-      fullName: admin.fullname || "",
-      email: admin.email || "",
-      contactNo: "",
+      fullname: admin.fullname || "",
+      mobile: admin.mobile || "",
     });
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", form);
-    // TODO: Connect with editAdmin mutation
+
+    try {
+      const result = await updateProfile({
+        fullname: form.fullname,
+        mobile: form.mobile,
+      }).unwrap();
+
+      console.log("Profile update result:", result);
+      // Refetch to get updated data
+      await refetch();
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Profile Updated',
+        text: 'Your profile has been updated successfully.',
+        confirmButtonColor: '#ffbf00',
+        timer: 2000,
+        timerProgressBar: true
+      });
+    } catch (error) {
+      console.error("Profile update error:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Update Failed',
+        text: error?.data?.message || 'Failed to update profile. Please try again.',
+        confirmButtonColor: '#ffbf00'
+      });
+    }
   };
 
   if (isLoading) {
@@ -57,13 +83,13 @@ function EditProfile() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="text-sm md:text-base text-white mb-2 font-semibold block">
-              User Name
+              Full Name
             </label>
             <input
               type="text"
-              name="fullName"
-              value={form.fullName}
-              onChange={(e) => setForm({ ...form, fullName: e.target.value })}
+              name="fullname"
+              value={form.fullname}
+              onChange={(e) => setForm({ ...form, fullname: e.target.value })}
               className="w-full px-4 py-3 border border-[#4a5060] rounded-md outline-none placeholder:text-sm md:placeholder:text-base focus:ring-2 focus:ring-[#ffbf00] bg-[#2a2a2a] text-white"
               placeholder="Enter full name"
               required
@@ -72,36 +98,25 @@ function EditProfile() {
 
           <div>
             <label className="text-sm md:text-base text-white mb-2 font-semibold block">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full px-4 py-3 border border-[#4a5060] rounded-md outline-none placeholder:text-sm md:placeholder:text-base focus:ring-2 focus:ring-[#ffbf00] bg-[#2a2a2a] text-white"
-              placeholder="Enter email"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="text-sm md:text-base text-white mb-2 font-semibold block">
-              Contact Number
+              Mobile Number
             </label>
             <input
               type="text"
-              name="contactNo"
-              value={form.contactNo}
-              onChange={(e) => setForm({ ...form, contactNo: e.target.value })}
+              name="mobile"
+              value={form.mobile}
+              onChange={(e) => setForm({ ...form, mobile: e.target.value })}
               className="w-full px-4 py-3 border border-[#4a5060] rounded-md outline-none placeholder:text-sm md:placeholder:text-base focus:ring-2 focus:ring-[#ffbf00] bg-[#2a2a2a] text-white"
-              placeholder="Enter contact number"
+              placeholder="Enter mobile number"
             />
           </div>
 
           <div className="text-center pt-2">
-            <button type="submit" className="bg-[#ffbf00] text-white font-semibold w-full py-3 rounded-lg hover:opacity-95 transition">
-              Save & Change
+            <button
+              type="submit"
+              disabled={isUpdatingProfile}
+              className="bg-[#ffbf00] text-white font-semibold w-full py-3 rounded-lg hover:opacity-95 transition disabled:opacity-50"
+            >
+              {isUpdatingProfile ? "Saving..." : "Save & Change"}
             </button>
           </div>
         </form>

@@ -35,7 +35,15 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["admin"],
     }),
+    profile: builder.mutation({
+      query: (data) => ({
+        url: "/admin/update-profile",
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["admin"],
+    }),
   }),
 });
 
-export const { useGetAllAdminQuery, useEditAdminMutation, useMeQuery, useAvatarMutation } = adminApi;
+export const { useGetAllAdminQuery, useEditAdminMutation, useMeQuery, useAvatarMutation, useProfileMutation } = adminApi;
