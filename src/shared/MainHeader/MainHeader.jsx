@@ -55,7 +55,7 @@ const MainHeader = ({ toggleSidebar }) => {
           </button>
           <div className="flex items-center gap-3">
             {/* Notification */}
-            <button
+            {/* <button
               type="button"
               aria-label="Notifications"
               onClick={() => navigate('/notifications')}
@@ -63,7 +63,7 @@ const MainHeader = ({ toggleSidebar }) => {
             >
               <IoNotificationsOutline className="w-6 h-6 text-[#ffbe00]" />
               <span className="absolute -top-0.5 -right-0.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-[#ffbe00] text-white text-[10px] px-1 leading-none">3</span>
-            </button>
+            </button> */}
 
             {/* Profile */}
             <div
