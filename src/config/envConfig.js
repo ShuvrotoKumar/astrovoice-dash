@@ -3,9 +3,9 @@
 // export const pdfUrl = "http://10.10.20.57:8001";
 // export const imageUrl = "http://10.10.20.57:8001/uploads";
 
-export const url = "https://tmp.megyai.com/api/v1/";
-export const pdfUrl = "https://tmp.megyai.com/";
-export const imageUrl = "https://tmp.megyai.com/";
+export const url = process.env.VITE_URL;
+export const pdfUrl = process.env.VITE_PDF_URL;
+export const imageUrl = process.env.VITE_IMAGE_URL;
 
 export const getBaseUrl = () => {
   return url;
