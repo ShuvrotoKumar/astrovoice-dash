@@ -1,0 +1,131 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { IoChevronBack } from "react-icons/io5";
+import { useGetAboutUsQuery, useAboutUsMutation } from "../../redux/api/termsApi";
+import Swal from 'sweetalert2';
+
+// Add custom styles for ReactQuill toolbar
+const quillStyles = `
+  .ql-toolbar .ql-stroke {
+    stroke: black !important;
+  }
+  .ql-toolbar .ql-fill {
+    fill: black !important;
+  }
+  .ql-toolbar .ql-picker {
+    color: black !important;
+  }
+  .ql-toolbar button {
+    color: black !important;
+  }
+  .ql-toolbar .ql-picker-label {
+    color: black !important;
+  }
+  .ql-toolbar .ql-picker-options {
+    color: black !important;
+  }
+`;
+
+function AboutUs() {
+  const navigate = useNavigate();
+  const { data: aboutData, isLoading: isFetching } = useGetAboutUsQuery();
+  const [aboutUs, { isLoading: isUpdating }] = useAboutUsMutation();
+  const [content, setContent] = useState("");
+
+  // Set content from API data when fetched
+  useEffect(() => {
+    console.log("Fetched aboutData:", aboutData);
+    if (aboutData) {
+      const fetchedContent = 
+        aboutData?.data?.content || 
+        aboutData?.data?.description || 
+        aboutData?.data?.text ||
+        aboutData?.data?.aboutUs ||
+        (typeof aboutData?.data === 'string' ? aboutData?.data : null) ||
+        (Array.isArray(aboutData?.data) ? (aboutData.data[0]?.content || aboutData.data[0]?.description) : null) ||
+        aboutData?.content ||
+        aboutData?.description;
+
+      if (fetchedContent) {
+        setContent(fetchedContent);
+      }
+    }
+  }, [aboutData]);
+
+  const handleSave = async () => {
+    if (!content.trim()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Empty Content',
+        text: 'About Us content cannot be empty',
+        confirmButtonColor: '#ffbf00'
+      });
+      return;
+    }
+
+    try {
+      // Send both content and description to support any backend field naming conventions
+      await aboutUs({ requestData: { content, description: content } }).unwrap();
+      Swal.fire({
+        icon: 'success',
+        title: 'Saved',
+        text: 'About Us has been updated successfully',
+        confirmButtonColor: '#ffbf00',
+        timer: 2000,
+        timerProgressBar: true
+      });
+    } catch (error) {
+      console.error('About Us update error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Save Failed',
+        text: error?.data?.message || 'Failed to update About Us',
+        confirmButtonColor: '#ffbf00'
+      });
+    }
+  };
+
+  return (
+    <>
+      <style>{quillStyles}</style>
+      <div className="p-5">
+      <div className="bg-[#ffbf00] px-5 py-3 rounded-md mb-3 flex items-center gap-3">
+        <button
+          onClick={() => navigate(-1)}
+          className="text-white hover:opacity-90 transition"
+          aria-label="Go back"
+        >
+          <IoChevronBack className="w-6 h-6" />
+        </button>
+        <h1 className="text-white text-2xl font-bold">About Us</h1>
+      </div>
+
+      <div className=" bg-[#393d4a] rounded shadow p-5 h-full border border-[#4a5060]">
+        {isFetching ? (
+          <div className="text-white text-center py-10">Loading About Us...</div>
+        ) : (
+          <ReactQuill
+            style={{ padding: "10px", color: "black" }}
+            theme="snow"
+            value={content}
+            onChange={setContent}
+          />
+        )}
+      </div>
+      <div className="text-center py-5">
+        <button
+          onClick={handleSave}
+          disabled={isUpdating || isFetching}
+          className="bg-[#ffbf00] text-white font-semibold w-full py-2 rounded transition duration-200 disabled:opacity-50"
+        >
+          {isUpdating ? 'Saving...' : 'Save changes'}
+        </button>
+      </div>
+    </div>
+    </>
+  );
+}
+
+export default AboutUs;

@@ -1,0 +1,275 @@
+/* eslint-disable react/prop-types */
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { RxDashboard } from "react-icons/rx";
+import { LuUsers } from "react-icons/lu";
+import { TbReport } from "react-icons/tb";
+import { IoMdSettings } from "react-icons/io";
+import { IoCloseSharp, IoLogOutOutline } from "react-icons/io5";
+import {
+  MdAdminPanelSettings,
+} from "react-icons/md";
+import { BsCreditCard, BsCurrencyDollar, BsReceipt } from "react-icons/bs";
+import { BiCategory } from "react-icons/bi";
+import { RiFlaskLine } from "react-icons/ri";
+import { useLogoutMutation } from "../../redux/api/authApi";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/Slice/authSlice";
+import Swal from 'sweetalert2';
+
+const Sidebar = ({ isOpen, toggleSidebar }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentPath = location.pathname;
+  const isActive = (path) => currentPath === path;
+  const dispatch = useDispatch();
+  const [logoutApi, { isLoading }] = useLogoutMutation();
+
+  // Close sidebar when a link is clicked on mobile
+  const handleLinkClick = () => {
+    if (window.innerWidth < 1024) {
+      toggleSidebar();
+    }
+  };
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure you want to logout?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ffbf00",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Logout",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await logoutApi().unwrap();
+          dispatch(logout());
+          navigate("/sign-in");
+        } catch (err) {
+          console.error("Logout failed:", err);
+          dispatch(logout());
+          navigate("/sign-in");
+        }
+      }
+    });
+  };
+
+  return (
+    <div
+      className={`bg-[#393d4a] text-white h-screen overflow-y-auto py-5 md:py-0 z-50 transition-transform shadow-lg my-5 rounded-lg shadow-[0_0_10px_0_rgba(0,0,0,0.1)]
+        w-[80%] sm:w-[70%] md:w-[60%] lg:w-70 xl:w-72
+        ${isOpen ? "translate-x-0" : "-translate-x-full"}
+        fixed top-0 left-0
+        lg:static lg:translate-x-0
+      `}
+    >
+      {/* Close Button (Mobile Only) */}
+      <button
+        onClick={toggleSidebar}
+        className="absolute top-4 right-4 lg:hidden text-white bg-#ffbf00 focus:outline-none p-2 rounded-full"
+      >
+        <IoCloseSharp />
+      </button>
+
+      {/* Logo */}
+      <div className="flex justify-center items-center gap-2 px-5 mt-20">
+        <img src="/logo.png" className="w-[140px] h-[140px]" style={{objectFit: "contain"}} alt="User Avatar" />
+      </div>
+
+      {/* Sidebar Menu */}
+       <ul className="mt-10 px-5 text-[10px]">
+        {/* Dashboard Page */}
+        <Link to="/dashboard" onClick={handleLinkClick}>
+          <li
+            className={`flex items-center gap-2 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <RxDashboard className="w-5 h-5" />
+            <p className="text-lg font-semibold">Dashboard</p>
+          </li>
+        </Link>
+        {/* User Management */}
+        <Link to="/dashboard/user-details" onClick={handleLinkClick}>
+          <li
+            className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/user-details")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <LuUsers className="w-5 h-5" />
+            <p className="text-lg font-semibold">All Users</p>
+          </li>
+        </Link>
+
+              <Link to="/dashboard/card" onClick={handleLinkClick}>
+          <li
+            className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/card")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <TbReport className="w-5 h-5" />
+            <p className="text-lg font-semibold">Energy Card</p>
+          </li>
+        </Link>
+        {/* Earnings */}
+     {/* <Link to="/dashboard/earnings" onClick={handleLinkClick}>
+          <li
+            className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/earnings")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <BsCurrencyDollar className="w-5 h-5" />
+            <p className="text-lg font-semibold">Earnings</p>
+          </li>
+        </Link>  */}
+
+        {/* Subscriptions
+        <Link to="/dashboard/subscriptions" onClick={handleLinkClick}>
+          <li
+            className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/subscriptions")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <BsCreditCard className="w-5 h-5" />
+            <p className="text-lg font-semibold">Subscriptions</p>
+          </li>
+        </Link> */}
+
+
+        {/* Categories */}
+        {/* <Link to="/dashboard/categories" onClick={handleLinkClick}>
+          <li
+            className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/categories")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <BiCategory className="w-5 h-5" />
+            <p className="text-lg font-semibold">Categories</p>
+          </li>
+        </Link> */}
+
+
+        {/* Lab Management */}
+        {/* <Link to="/dashboard/payment-management" onClick={handleLinkClick}>
+          <li
+            className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/payment-management")
+                ? "bg-#ffbf00 text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <RiFlaskLine className="w-5 h-5" />
+            <p className="text-lg font-semibold whitespace-nowrap">Payments</p>
+          </li>
+        </Link> */}
+
+        {/* Invoices */}
+        {/* <Link to="/dashboard/invoices" onClick={handleLinkClick}>
+          <li
+            className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/invoices")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <BsReceipt className="w-5 h-5" />
+            <p className="text-lg font-semibold">Invoices</p>
+          </li>
+        </Link>   */}
+
+         {/* <Link to="/dashboard/chat" onClick={handleLinkClick}>
+          <li
+            className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/chat")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <BiCategory className="w-5 h-5" />
+            <p className="text-lg font-semibold">Chat</p>
+          </li>
+        </Link>  */}
+
+
+        {/* Create Admin */}
+         <Link to="/dashboard/create-admin">
+          <li
+            className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/create-admin")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <MdAdminPanelSettings className="w-5 h-5" />
+            <p className="text-lg font-semibold">Create Admin</p>
+          </li>
+        </Link>
+
+        {/*Reports*/}
+        {/* <Link to="/dashboard/reports">
+          <li
+            className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/reports")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <TbReport className="w-5 h-5" />
+            <p className="text-lg font-semibold">Reports</p>
+          </li>
+        </Link>  */}
+         {/* <Link to="/dashboard/blogs">
+          <li
+            className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/blogs")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <TbReport className="w-5 h-5" />
+            <p className="text-lg font-semibold">Blogs</p>
+          </li>
+        </Link> */}
+        <Link to="/dashboard/settings">
+          <li
+            className={`flex items-center gap-2 mt-5 cursor-pointer transition-all duration-300 ease-in-out ${
+              isActive("/dashboard/settings")
+                ? "bg-[#ffbe00] text-white px-3 py-3 rounded-lg"
+                : "[#ffbe00] px-3 py-3 rounded-lg"
+            }`}
+          >
+            <IoMdSettings className="w-5 h-5 text-lg font-semibold" />
+            <p className="text-lg font-semibold">Settings</p>
+          </li>
+        </Link>
+
+      </ul>
+
+      {/* Logout Button */}
+      <div className="absolute mt-8 md:mt-20 mmd:mt-20 w-full px-5 text-[#ffbe00]">
+        <button
+          onClick={handleLogout}
+          disabled={isLoading}
+          className="flex items-center gap-4 w-full py-3 rounded-lg bg-red-500 px-3 duration-200 text-white justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <IoLogOutOutline className="w-5 h-5 font-bold" />
+          <span>{isLoading ? 'Logging out...' : 'Logout'}</span>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;

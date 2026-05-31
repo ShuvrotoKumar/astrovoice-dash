@@ -1,0 +1,69 @@
+import { baseApi } from "./baseApi";
+
+const authApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    logIn: builder.mutation({
+      query: (data) => {
+        console.log("Data being sent to the API:", data);
+        return {
+          url: "admin/login",
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["admin"],
+    }),
+    forgotPassword: builder.mutation({
+      query: (data) => ({
+        url: "auth/forget-password",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    verifyEmail: builder.mutation({
+      query: (data) => ({
+        url: "auth/forget-password-check-otp",
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (data) => ({
+        url: "auth/reset-password",
+        method: "PATCH",
+        body: data,
+        headers: {
+          Authorization: document.cookie.match(/(?:^|; )resetToken=([^;]*)/)?.[1] ?? "",
+        },
+      }),
+
+      invalidatesTags: ["admin"],
+    }),
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: "admin/change-password",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["admin"],
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "admin/logout",
+        method: "POST",
+      }),
+      invalidatesTags: ["admin"],
+    }),
+  }),
+});
+
+export const {
+  useLogInMutation,
+  useForgotPasswordMutation,
+  useVerifyEmailMutation,
+  useResetPasswordMutation,
+  useChangePasswordMutation,
+  useLogoutMutation,
+} = authApi;
+
+export default authApi;
