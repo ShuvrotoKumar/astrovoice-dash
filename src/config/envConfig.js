@@ -3,8 +3,8 @@
 // export const pdfUrl = "http://10.10.20.57:8001";
 // export const imageUrl = "http://10.10.20.57:8001/uploads";
 
-export const url = import.meta.env.VITE_URL || 'https://tmp.megyai.com/api/v1';
-export const pdfUrl = import.meta.env.VITE_PDF_URL || 'https://tmp.megyai.com/api/v1';
+export const url = import.meta.env.VITE_URL || 'https://tmp.megyai.com/api/v1/';
+export const pdfUrl = import.meta.env.VITE_PDF_URL || 'https://tmp.megyai.com/api/v1/';
 export const imageUrl = import.meta.env.VITE_IMAGE_URL || 'https://tmp.megyai.com';
 
 export const getBaseUrl = () => {
