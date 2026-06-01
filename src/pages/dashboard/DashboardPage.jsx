@@ -3,12 +3,20 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import RecentUsers from "./RecentUsers";
 import TotalView from "./TotalView";
+import { useRecentUsersQuery } from "../../redux/api/userApi";
+import { useGetAllAdminQuery } from "../../redux/api/adminApi";
 
 function DashboardPage() {
   const currentYear = dayjs().year();
   const startYear = 2020;
   const [selectedYear, setSelectedYear] = useState(currentYear);
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data: usersData, isLoading: isUserLoading } = useRecentUsersQuery();
+  const { data: adminsData, isLoading: isAdminLoading } = useGetAllAdminQuery();
+
+  const totalUsers = usersData?.data?.pagination?.totalUsers || 0;
+  const totalAdmins = adminsData?.data?.length || 0;
 
   const years = Array.from(
     { length: currentYear - startYear + 1 },
@@ -25,8 +33,8 @@ function DashboardPage() {
       {/* Stats Grid */}
       <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-4">
         {[
-          { value: '200K', label: 'Total User' },
-          { value: '$120K', label: 'Total Revenue' }
+          { value: isUserLoading ? "..." : totalUsers, label: 'Total User' },
+          { value: isAdminLoading ? "..." : totalAdmins, label: 'Total Admin' }
         ].map((stat, index, array) => (
           <div
             key={stat.label}
