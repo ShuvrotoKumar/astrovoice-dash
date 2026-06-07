@@ -1,17 +1,15 @@
-import { ConfigProvider, Modal, Table, Select } from "antd";
-import { useMemo, useState } from "react";
-import { IoSearch, IoChevronBack, IoAddOutline } from "react-icons/io5";
+import { ConfigProvider, Modal, Table } from "antd";
+import { useMemo, useState, useEffect } from "react";
+import { IoSearch, IoChevronBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { FiTrash2 } from "react-icons/fi";
 import { FiEdit2 } from 'react-icons/fi';
-import Swal from 'sweetalert2';
+// Swal removed (delete action removed)
+import { useGetAllSubscriberQuery } from "../../redux/api/allSubscriberApi";
 
 function Subscriptions() {
   const navigate = useNavigate();
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedSubscription, setSelectedSubscription] = useState(null);
-  const [statusFilter, setStatusFilter] = useState();
   const [searchQuery, setSearchQuery] = useState("");
 
 
@@ -23,14 +21,6 @@ function Subscriptions() {
   const handleViewCancel = () => {
     setIsViewModalOpen(false);
     setSelectedSubscription(null);
-  };
-
-  const showAddModal = () => {
-    setIsAddModalOpen(true);
-  };
-
-  const handleAddCancel = () => {
-    setIsAddModalOpen(false);
   };
 
   const [dataSource, setDataSource] = useState([
@@ -65,6 +55,31 @@ function Subscriptions() {
       paymentMethod: "Bank Transfer",
     },
   ]);
+
+  const { data: subscribersData, isLoading: isSubscribersLoading, error: subscribersError } = useGetAllSubscriberQuery();
+
+  const mappedSubscribers = useMemo(() => {
+    const list = subscribersData?.data ?? subscribersData ?? [];
+    if (!Array.isArray(list) || list.length === 0) return null;
+
+    return list.map((item, idx) => ({
+      key: item.id ?? item._id ?? String(idx + 1),
+      name: item.name ?? item.planName ?? item.title ?? `Plan ${idx + 1}`,
+      user: item.user?.name ?? item.user ?? item.owner ?? "—",
+      status: item.status ?? item.state ?? "Active",
+      price: item.price ? String(item.price) : item.amount ?? item.cost ?? "—",
+      startDate: item.startDate ?? item.from ?? "—",
+      endDate: item.endDate ?? item.to ?? "—",
+      paymentMethod: item.paymentMethod ?? item.payment ?? "—",
+    }));
+  }, [subscribersData]);
+
+  // Initialize / update dataSource from API when available
+  useEffect(() => {
+    if (mappedSubscribers && mappedSubscribers.length > 0) {
+      setDataSource(mappedSubscribers);
+    }
+  }, [mappedSubscribers]);
 
   const columns = [
     {
@@ -120,9 +135,6 @@ function Subscriptions() {
       key: "action",
       render: (_, record) => (
         <div className="flex gap-2">
-          <button className="" onClick={() => openCancel(record)}>
-            <FiTrash2 className="h-5 w-5 text-red-600 cursor-pointer rounded-md" />
-          </button>
           <button className="" onClick={() => showViewModal(record)}>
             <FiEdit2 className="text-[#ffbf00] w-5 h-5 cursor-pointer rounded-md" />
           </button>
@@ -134,41 +146,16 @@ function Subscriptions() {
   const filteredData = useMemo(() => {
     const q = (searchQuery || "").toLowerCase().trim();
     return dataSource.filter((r) => {
-      const matchStatus = statusFilter ? r.status === statusFilter : true;
       const matchQuery = q
         ? [r.name, r.user, r.status, r.price, r.paymentMethod]
-          .filter(Boolean)
-          .some((v) => String(v).toLowerCase().includes(q))
+            .filter(Boolean)
+            .some((v) => String(v).toLowerCase().includes(q))
         : true;
-      return matchStatus && matchQuery;
+      return matchQuery;
     });
-  }, [dataSource, statusFilter, searchQuery]);
+  }, [dataSource, searchQuery]);
 
-  const openCancel = (row) => {
-    Swal.fire({
-      title: 'Cancel Subscription?',
-      html: `Are you sure you want to cancel the subscription for <strong>${row.user}</strong>?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#ffbf00',
-      cancelButtonColor: '#6B7280',
-      confirmButtonText: 'Yes, Cancel',
-      cancelButtonText: 'No, Keep It',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setDataSource(dataSource.filter(item => item.key !== row.key));
-        Swal.fire({
-          title: 'Cancelled!',
-          text: `Subscription for ${row.user} has been cancelled.`,
-          icon: 'success',
-          confirmButtonColor: '#ffbf00',
-          timer: 2000,
-          timerProgressBar: true
-        });
-      }
-    });
-  };
+ 
 
   return (
     <div>
@@ -194,7 +181,7 @@ function Subscriptions() {
           <IoSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
         </div>
         
-        <div className="ml-0 md:ml-auto flex items-center gap-2 w-full md:w-auto mt-2 md:mt-0">
+          <div className="ml-0 md:ml-auto flex items-center gap-2 w-full md:w-auto mt-2 md:mt-0">
           <div className="relative hidden md:block">
             <input
               type="text"
@@ -206,25 +193,7 @@ function Subscriptions() {
             <IoSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-[#111827]" />
           </div>
           
-          <Select
-            placeholder="Filter by status"
-            allowClear
-            onChange={setStatusFilter}
-            className="w-full md:w-40"
-            options={[
-              { value: 'Active', label: 'Active' },
-              { value: 'Expired', label: 'Expired' },
-              { value: 'Cancelled', label: 'Cancelled' },
-            ]}
-          />
-          
-          <button
-            onClick={showAddModal}
-            className="bg-white text-[#ffbf00] hover:bg-gray-100 px-4 py-2 rounded-md flex items-center gap-2 whitespace-nowrap"
-          >
-            <IoAddOutline className="w-5 h-5" />
-            <span>Add Subscription</span>
-          </button>
+         
         </div>
       </div>
 
@@ -351,95 +320,7 @@ function Subscriptions() {
           )}
         </Modal>
 
-        {/* Add Subscription Modal */}
-        <Modal
-          title={<span style={{ color: "white" }}>Add New Subscription</span>}
-          open={isAddModalOpen}
-          onCancel={handleAddCancel}
-          styles={{ content: { backgroundColor: "#393d4a" }, header: { backgroundColor: "#393d4a" } }}
-          footer={[
-            <button
-              key="cancel"
-              onClick={handleAddCancel}
-              className="px-6 py-2 border border-gray-300 rounded-lg text-white"
-            >
-              Cancel
-            </button>,
-            <button
-              key="save"
-              onClick={() => {
-                // Handle save functionality
-                console.log('Save new subscription');
-                handleAddCancel();
-              }}
-              className="bg-[#ffbf00] text-white px-6 py-2 rounded-lg hover:bg-blue-700"
-            >
-              Add Subscription
-            </button>
-          ]}
-          width={800}
-        >
-          <div className="space-y-4 bg-[#393d4a] p-4 rounded-lg">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Plan Name</label>
-                <input
-                  type="text"
-                  placeholder="Enter plan name"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
-                />
-              </div>
-              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
-                <label className="block text-sm font-medium text-gray-700 mb-1">User</label>
-                <input
-                  type="text"
-                  placeholder="Enter user name"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
-                />
-              </div>
-              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>
-                <input
-                  type="text"
-                  placeholder="Enter price"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
-                />
-              </div>
-              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]">
-                  <option value="">Select status</option>
-                  <option value="Active">Active</option>
-                  <option value="Expired">Expired</option>
-                  <option value="Cancelled">Cancelled</option>
-                </select>
-              </div>
-              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
-                <input
-                  type="date"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
-                />
-              </div>
-              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
-                <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
-                <input
-                  type="date"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]"
-                />
-              </div>
-              <div className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Payment Method</label>
-                <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffbf00]">
-                  <option value="">Select payment method</option>
-                  <option value="Credit Card">Credit Card</option>
-                  <option value="PayPal">PayPal</option>
-                  <option value="Bank Transfer">Bank Transfer</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </Modal>
+        
       </ConfigProvider>
     </div>
   );

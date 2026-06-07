@@ -118,7 +118,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </li>
         </Link>
         {/* Earnings */}
-     {/* <Link to="/dashboard/earnings" onClick={handleLinkClick}>
+      <Link to="/dashboard/earnings" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
               isActive("/dashboard/earnings")
@@ -129,9 +129,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <BsCurrencyDollar className="w-5 h-5" />
             <p className="text-lg font-semibold">Earnings</p>
           </li>
-        </Link>  */}
+        </Link>  
 
-        {/* Subscriptions
+        {/* Subscriptions */}
         <Link to="/dashboard/subscriptions" onClick={handleLinkClick}>
           <li
             className={`flex items-center gap-2 mt-2 cursor-pointer transition-all duration-300 ease-in-out ${
@@ -143,7 +143,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <BsCreditCard className="w-5 h-5" />
             <p className="text-lg font-semibold">Subscriptions</p>
           </li>
-        </Link> */}
+        </Link>
 
 
         {/* Categories */}
