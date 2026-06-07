@@ -12,7 +12,7 @@ import {
   FiZap,
   FiSend,
 } from "react-icons/fi";
-import { useGetAllSubscriberQuery } from "../../redux/api/allSubscriberApi";
+import { useGetAllSubscriberQuery, useUpdateSubscriberMutation } from "../../redux/api/allSubscriberApi";
 
 /* ─── helpers ─────────────────────────────────────────────────────────── */
 
@@ -246,9 +246,17 @@ function Subscriptions() {
   const [selectedSubscription, setSelectedSubscription] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState("card"); // "card" | "table"
+  const [editForm, setEditForm] = useState({ priceInEuros: "", description: "", eligibility: "" });
 
   const showViewModal = (subscription) => {
     setSelectedSubscription(subscription);
+    // populate edit form from raw data when available
+    const src = subscription?.raw ?? subscription ?? {};
+    setEditForm({
+      priceInEuros: src.priceEuros ?? (typeof src.priceCents === 'number' ? (src.priceCents/100) : undefined) ?? (typeof src.price === 'number' ? src.price : undefined) ?? "",
+      description: src.description ?? "",
+      eligibility: src.eligibility ?? "",
+    });
     setIsViewModalOpen(true);
   };
   const handleViewCancel = () => {
@@ -290,6 +298,7 @@ function Subscriptions() {
   ]);
 
   const { data: subscribersData } = useGetAllSubscriberQuery();
+  const [updateSubscriber, { isLoading: isUpdating }] = useUpdateSubscriberMutation();
 
   const mappedSubscribers = useMemo(() => {
     const payload = subscribersData ?? {};
@@ -313,6 +322,7 @@ function Subscriptions() {
       startDate: item.startDate ?? item.from ?? "—",
       endDate: item.endDate ?? item.to ?? "—",
       paymentMethod: item.paymentMethod ?? item.payment ?? "—",
+      raw: item,
     }));
   }, [subscribersData]);
 
@@ -516,74 +526,112 @@ function Subscriptions() {
                 marginBottom: 24,
               }}
             >
-              {[
-                { label: "Plan Name", value: selectedSubscription.name },
-                { label: "Price", value: selectedSubscription.price },
-                { label: "Start Date", value: selectedSubscription.startDate },
-                { label: "End Date", value: selectedSubscription.endDate },
-                { label: "Payment Method", value: selectedSubscription.paymentMethod },
-              ].map(({ label, value }) => (
-                <div
-                  key={label}
-                  style={{
-                    background: "#f9fafb",
-                    border: "0.5px solid #e5e7eb",
-                    borderRadius: 10,
-                    padding: "12px 16px",
-                  }}
-                >
-                  <div style={{ fontSize: 12, color: "#9ca3af", marginBottom: 4 }}>{label}</div>
-                  <div style={{ fontSize: 15, fontWeight: 600, color: "#111" }}>{value}</div>
+              <div style={{ display: 'grid', gap: 12 }}>
+                <div style={{ background: "#f9fafb", border: "0.5px solid #e5e7eb", borderRadius: 10, padding: "12px 16px" }}>
+                  <div style={{ fontSize: 12, color: "#9ca3af", marginBottom: 4 }}>Plan Name</div>
+                  <div style={{ fontSize: 15, fontWeight: 600, color: "#111" }}>{selectedSubscription.name}</div>
                 </div>
-              ))}
+
+                <div style={{ background: "#f9fafb", border: "0.5px solid #e5e7eb", borderRadius: 10, padding: "12px 16px" }}>
+                  <div style={{ fontSize: 12, color: "#9ca3af", marginBottom: 4 }}>Price (EUR)</div>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={editForm.priceInEuros}
+                    onChange={(e) => setEditForm((s) => ({ ...s, priceInEuros: e.target.value }))}
+                    style={{ width: '100%', padding: '8px', borderRadius: 6, border: '1px solid #e5e7eb' }}
+                  />
+                </div>
+
+                <div style={{ background: "#f9fafb", border: "0.5px solid #e5e7eb", borderRadius: 10, padding: "12px 16px" }}>
+                  <div style={{ fontSize: 12, color: "#9ca3af", marginBottom: 4 }}>Description</div>
+                  <textarea
+                    value={editForm.description}
+                    onChange={(e) => setEditForm((s) => ({ ...s, description: e.target.value }))}
+                    rows={3}
+                    style={{ width: '100%', padding: '8px', borderRadius: 6, border: '1px solid #e5e7eb' }}
+                  />
+                </div>
+
+                <div style={{ background: "#f9fafb", border: "0.5px solid #e5e7eb", borderRadius: 10, padding: "12px 16px" }}>
+                  <div style={{ fontSize: 12, color: "#9ca3af", marginBottom: 4 }}>Eligibility</div>
+                  <input
+                    value={editForm.eligibility}
+                    onChange={(e) => setEditForm((s) => ({ ...s, eligibility: e.target.value }))}
+                    style={{ width: '100%', padding: '8px', borderRadius: 6, border: '1px solid #e5e7eb' }}
+                  />
+                </div>
+              </div>
             </div>
 
             {/* footer actions */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                gap: 10,
-                paddingTop: 16,
-                borderTop: "0.5px solid #e5e7eb",
-              }}
-            >
-              <button
-                onClick={handleViewCancel}
+              <div
                 style={{
-                  padding: "8px 20px",
-                  borderRadius: 8,
-                  border: "0.5px solid #d1d5db",
-                  background: "transparent",
-                  cursor: "pointer",
-                  fontSize: 14,
-                  color: "#374151",
-                }}
-              >
-                Close
-              </button>
-              <button
-                onClick={() => {
-                  console.log("Save:", selectedSubscription);
-                  handleViewCancel();
-                }}
-                style={{
-                  padding: "8px 20px",
-                  borderRadius: 8,
-                  border: "none",
-                  background: planMeta(selectedSubscription.name).accent,
-                  color: "#fff",
-                  cursor: "pointer",
-                  fontSize: 14,
-                  fontWeight: 500,
                   display: "flex",
-                  alignItems: "center",
-                  gap: 6,
+                  justifyContent: "flex-end",
+                  gap: 10,
+                  paddingTop: 16,
+                  borderTop: "0.5px solid #e5e7eb",
                 }}
               >
-                <FiEdit2 size={14} /> Save Changes
-              </button>
-            </div>
+                <button
+                  onClick={handleViewCancel}
+                  style={{
+                    padding: "8px 20px",
+                    borderRadius: 8,
+                    border: "0.5px solid #d1d5db",
+                    background: "transparent",
+                    cursor: "pointer",
+                    fontSize: 14,
+                    color: "#374151",
+                  }}
+                >
+                  Close
+                </button>
+                <button
+                  onClick={async () => {
+                    if (!selectedSubscription) return;
+                    const id = selectedSubscription.raw?.id ?? selectedSubscription.key;
+                    const body = {
+                      priceInEuros: Number(editForm.priceInEuros),
+                      description: editForm.description,
+                      eligibility: editForm.eligibility,
+                    };
+                    try {
+                      await updateSubscriber({ id, data: body }).unwrap();
+                      // update local dataSource
+                      setDataSource((prev) =>
+                        prev.map((p) =>
+                          p.key === (id ?? selectedSubscription.key)
+                            ? { ...p, price: `€${Number(body.priceInEuros)}`, raw: { ...(p.raw ?? {}), ...body } }
+                            : p
+                        )
+                      );
+                      handleViewCancel();
+                      alert('Plan updated successfully');
+                    } catch (err) {
+                      console.error('Update failed', err);
+                      alert('Failed to update plan');
+                    }
+                  }}
+                  disabled={isUpdating}
+                  style={{
+                    padding: "8px 20px",
+                    borderRadius: 8,
+                    border: "none",
+                    background: planMeta(selectedSubscription.name).accent,
+                    color: "#fff",
+                    cursor: isUpdating ? 'not-allowed' : 'pointer',
+                    fontSize: 14,
+                    fontWeight: 500,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                  }}
+                >
+                  <FiEdit2 size={14} /> {isUpdating ? 'Saving...' : 'Save Changes'}
+                </button>
+              </div>
           </div>
         )}
       </Modal>
