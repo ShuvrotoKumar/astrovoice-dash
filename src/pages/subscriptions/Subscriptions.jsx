@@ -59,15 +59,25 @@ function Subscriptions() {
   const { data: subscribersData, isLoading: isSubscribersLoading, error: subscribersError } = useGetAllSubscriberQuery();
 
   const mappedSubscribers = useMemo(() => {
-    const list = subscribersData?.data ?? subscribersData ?? [];
+    const payload = subscribersData ?? {};
+    const dataObj = payload.data ?? payload;
+
+    // Try to read list from known paths (subscriptionPlans for pricing endpoint)
+    const list = Array.isArray(dataObj)
+      ? dataObj
+      : dataObj.subscriptionPlans ?? dataObj.plans ?? dataObj.items ?? [];
+
     if (!Array.isArray(list) || list.length === 0) return null;
 
     return list.map((item, idx) => ({
       key: item.id ?? item._id ?? String(idx + 1),
       name: item.name ?? item.planName ?? item.title ?? `Plan ${idx + 1}`,
+      // Plans don't include a user; show placeholder
       user: item.user?.name ?? item.user ?? item.owner ?? "—",
-      status: item.status ?? item.state ?? "Active",
-      price: item.price ? String(item.price) : item.amount ?? item.cost ?? "—",
+      // For plans mark as Available
+      status: item.status ?? item.state ?? (item.type ? "Available" : "Active"),
+      // Prefer readable euro price when available
+      price: item.priceEuros ? `€${item.priceEuros}` : item.price ? String(item.price) : item.priceCents ? `€${(item.priceCents/100).toFixed(2)}` : item.amount ?? item.cost ?? "—",
       startDate: item.startDate ?? item.from ?? "—",
       endDate: item.endDate ?? item.to ?? "—",
       paymentMethod: item.paymentMethod ?? item.payment ?? "—",
